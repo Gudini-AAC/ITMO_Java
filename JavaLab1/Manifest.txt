@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: GeogryKhachatryan
+Package-Name: Lab1
+Main-Class: Main
