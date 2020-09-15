@@ -1,1 +1,1 @@
-# reimagined-memory
+# Java laboratory work
