@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Created-By: GeogryKhachatryan
 Package-Name: Lab2
 Main-Class: Main
-Class-Path: Pokemon.jar
+Class-Path: dependencies/Pokemon.jar
