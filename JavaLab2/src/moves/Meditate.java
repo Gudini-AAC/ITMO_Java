@@ -5,19 +5,19 @@ import ru.ifmo.se.pokemon.Type;
 import ru.ifmo.se.pokemon.Effect;
 import ru.ifmo.se.pokemon.Stat;
 
-public class SwordsDance extends StatusMove {
-	public SwordsDance() {
-		super(Type.NORMAL, 0., 100.);
+public class Meditate extends StatusMove {
+	public Meditate() {
+		super(Type.PSYCHIC, 0., 100.);
 	}
 
 	@Override
 	protected void applySelfEffects(Pokemon p) {
-		p.addEffect(new Effect().turns(-1).stat(Stat.ATTACK, 2));
+		p.addEffect(new Effect().turns(-1).stat(Stat.ATTACK, 1));
 	}
 
 	@Override
 	public String describe() {
-		return "dances a frenetic dance to uplift the fighting spirit";
+		return "meditates to awaken its power and raise its Attack stat";
 	}
 
 }

@@ -2,6 +2,9 @@ package pokemons;
 import ru.ifmo.se.pokemon.Pokemon;
 import ru.ifmo.se.pokemon.Type;
 import moves.SwordsDance;
+import moves.ThunderWave;
+import moves.IronDefense;
+import moves.Confide;
 
 public class Magearna extends Pokemon {
 	public Magearna() {
@@ -13,6 +16,9 @@ public class Magearna extends Pokemon {
 		setStats(80., 95., 115., 130., 115., 65.);
 		setType(Type.STEEL, Type.FAIRY);
 		addMove(new SwordsDance());
+		addMove(new ThunderWave());
+		addMove(new IronDefense());
+		addMove(new Confide());
 	}
 
 }

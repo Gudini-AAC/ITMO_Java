@@ -7,7 +7,8 @@ public class Main {
 
 		Battle b = new Battle();
 		Pokemon p1 = new Magearna("Alien", 1);
-		Pokemon p2 = new Pokemon("Predator", 1);
+		Pokemon p2 = new Meditite("Predator", 1);
+		Pokemon p3 = new Medicham("Predator2", 1);
 		b.addAlly(p1);
 		b.addFoe(p2);
 		b.go();
