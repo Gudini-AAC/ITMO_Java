@@ -22,3 +22,4 @@ public class Magearna extends Pokemon {
 	}
 
 }
+
