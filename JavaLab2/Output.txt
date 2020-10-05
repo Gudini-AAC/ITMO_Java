@@ -1,0 +1,103 @@
+Shiftry Bob from the team White enters the battle!
+Seedot Regex from the team Red enters the battle!
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Seedot Regex dances a frenetic dance to uplift the fighting spirit.
+
+Shiftry Bob pounds the foe with forelegs or tail.
+Seedot Regex loses 5 hit points.
+
+Seedot Regex struggles.
+Shiftry Bob loses 3 hit points.
+Seedot Regex loses 1 hit points.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Seedot Regex creates illusory copies to raise evasiveness.
+
+Shiftry Bob pounds the foe with forelegs or tail.
+Seedot Regex loses 5 hit points.
+
+Seedot Regex creates illusory copies to raise evasiveness.
+
+Shiftry Bob pounds the foe with forelegs or tail.
+Seedot Regex loses 3 hit points.
+Seedot Regex faints.
+Nuzleaf Ross from the team Red enters the battle!
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross dances a frenetic dance to uplift the fighting spirit.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross struggles.
+Shiftry Bob loses 4 hit points.
+Nuzleaf Ross loses 1 hit points.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross pounds the foe with forelegs or tail.
+Shiftry Bob loses 3 hit points.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross dances a frenetic dance to uplift the fighting spirit.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross creates illusory copies to raise evasiveness.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross creates illusory copies to raise evasiveness.
+
+Shiftry Bob creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross creates illusory copies to raise evasiveness.
+
+Shiftry Bob pounds the foe with forelegs or tail.
+Nuzleaf Ross loses 3 hit points.
+
+Nuzleaf Ross struggles.
+Shiftry Bob loses 4 hit points.
+Nuzleaf Ross loses 1 hit points.
+Shiftry Bob faints.
+Meditite John from the team White enters the battle!
+Meditite John hurls a shadowy blob at the foe. It may also lower the foe's Sp. Def stat.
+Nuzleaf Ross loses 2 hit points.
+
+Nuzleaf Ross creates illusory copies to raise evasiveness.
+
+Nuzleaf Ross pounds the foe with forelegs or tail.
+Nuzleaf Ross loses 4 hit points.
+
+Nuzleaf Ross pounds the foe with forelegs or tail.
+Nuzleaf Ross loses 5 hit points.
+Both pokemons faint.
+Magearna Nut from the team Red enters the battle!
+Magearna Nut tells the target a secret, and the target loses its ability to concentrate.
+
+Meditite John hurls a shadowy blob at the foe. It may also lower the foe's Sp. Def stat.
+Magearna Nut loses 6 hit points.
+
+Magearna Nut tells the target a secret, and the target loses its ability to concentrate.
+
+Meditite John meditates to awaken its power and raise its Attack stat.
+
+Magearna Nut dances a frenetic dance to uplift the fighting spirit.
+
+Meditite John struggles.
+Magearna Nut loses 4 hit points.
+Meditite John loses 1 hit points.
+
+Magearna Nut tells the target a secret, and the target loses its ability to concentrate.
+
+Meditite John meditates to awaken its power and raise its Attack stat.
+
+Magearna Nut hardens its body's surface like iron, sharply raising its Defense stat.
+
+Meditite John makes psychic attack that may cause confusion.
+Magearna Nut loses 4 hit points.
+Magearna Nut faints.
+Team Red loses its last Pokemon.
+The team White wins the battle!
