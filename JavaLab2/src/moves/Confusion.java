@@ -3,13 +3,12 @@ import ru.ifmo.se.pokemon.Pokemon;
 import ru.ifmo.se.pokemon.SpecialMove;
 import ru.ifmo.se.pokemon.Type;
 import ru.ifmo.se.pokemon.Effect;
-import ru.ifmo.se.pokemon.Stat;
 
 import java.lang.Math;
 
 public class Confusion extends SpecialMove {
 	public Confusion() {
-		super(Type.PSYCHIC, 50., 90.);
+		super(Type.PSYCHIC, 50., 100.);
 	}
 
 	@Override

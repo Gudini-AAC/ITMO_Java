@@ -9,7 +9,7 @@ import java.lang.Math;
 
 public class ShadowBall extends SpecialMove {
 	public ShadowBall() {
-		super(Type.GHOST, 80., 90.);
+		super(Type.GHOST, 80., 100.);
 	}
 
 	@Override
