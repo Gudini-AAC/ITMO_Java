@@ -16,11 +16,11 @@ public class Vec3 {
 
 	public Vec3(Vec3 other) {
 		x = other.x;
-		y = other.x;
-		z = other.x;
+		y = other.y;
+		z = other.z;
 	}
 	
- 	public final void add(Vec3 other) {
+	public final void add(Vec3 other) {
 		x += other.x;
 		y += other.y;
 		z += other.z;
@@ -95,6 +95,10 @@ public class Vec3 {
 
 	public final void normalize() {
 		div((float)Math.sqrt(x * x + y * y + z * z));
+	}
+
+	public final float length() {
+		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
 
 	public final float getX() { return x; }

@@ -19,10 +19,14 @@ public class StatePair {
 	}
 
 	public Vec3 getValue() { return value; }
-	public void setValue(Vec3 value) { value = new Vec3(value); }
+	public void setValue(Vec3 value) { this.value = new Vec3(value); }
 
 	public Vec3 getDerivative() { return derivative; }
-	public void setDerivative(Vec3 derivative) { derivative = new Vec3(derivative); }
+	public void setDerivative(Vec3 derivative) { this.derivative = new Vec3(derivative); }
+
+	public void integrate(float dt) {
+		value.add(Vec3.mul(derivative, dt));
+	}
 
 	private Vec3 value;
 	private Vec3 derivative;

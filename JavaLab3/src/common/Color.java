@@ -1,6 +1,6 @@
 package common;
 
-	public enum Color {
+public enum Color {
 	RED       ("Red"),
 	GREEN     ("Green"),
 	BLUE      ("Blue"),
