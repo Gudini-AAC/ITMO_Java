@@ -4,17 +4,17 @@ import linalg.Vec3;
 
 public class StatePair {
 	public StatePair() {
-		value = new Vec3();
+		value      = new Vec3();
 		derivative = new Vec3();
 	}
 
 	public StatePair(StatePair other) {
-		value = new Vec3(other.value);
+		value      = new Vec3(other.value);
 		derivative = new Vec3(other.derivative);
 	}
 
 	public StatePair(Vec3 value, Vec3 derivative) {
-		this.value = new Vec3(value);
+		this.value      = new Vec3(value);
 		this.derivative = new Vec3(derivative);
 	}
 
@@ -26,6 +26,13 @@ public class StatePair {
 
 	public void integrate(float dt) {
 		value.add(Vec3.mul(derivative, dt));
+	}
+
+	public static StatePair makeRandom(float min, float max) {
+		StatePair ret = new StatePair();
+		ret.value      = Vec3.makeRandom(min, max);
+		ret.derivative = Vec3.makeRandom(min, max);
+		return ret;
 	}
 
 	private Vec3 value;

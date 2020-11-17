@@ -4,17 +4,17 @@ import linalg.Vec3;
 import paths.Path;
 
 public class ManhattanPath implements Path {
-	ManhattanPath(float gridSize) {
+	public ManhattanPath(float gridSize) {
 		this.gridSize = gridSize;
 		this.points = new ArrayList<Vec3>();
 	}
 
 	@Override
 	public Vec3 interpolate(float t) {
-		float aim = calculateLength() * t;
+		float aim = length() * t;
 
 		int i = 0;
-		float len = 0.f
+		float len = 0.f;
 		while (len < aim && i < points.size()) {
 			i++;
 			len += manhattanLength(Vec3.sub(points.get(i - 1), points.get(i)));	
@@ -25,11 +25,14 @@ public class ManhattanPath implements Path {
 
 	@Override
 	public float length() {
-		return calculateLength();
+		float ret = 0.f;
+		for (int i = 1; i < points.size(); i++)
+			ret += manhattanLength(Vec3.sub(points.get(i - 1), points.get(i)));
+		return ret;
 	}
 
 	public void addPoint(Vec3 point) {
-		Vec3 pointOnGrid = new Vec3;
+		Vec3 pointOnGrid = new Vec3();
 
 		pointOnGrid.setX(point.getX() - point.getX() % gridSize);
 		pointOnGrid.setY(point.getY() - point.getY() % gridSize);
@@ -46,14 +49,6 @@ public class ManhattanPath implements Path {
 		return ret;
 	}
 
-	private float calculateLength() {
-		float ret = 0.f;
-		for (int i = 1; i < points.size(); i++)
-			ret += manhattanLength(Vec3.sub(points.get(i - 1), points.get(i)));
-		return ret;
-	}
-
 	private float gridSize;
 	private ArrayList<Vec3> points;
-
 }

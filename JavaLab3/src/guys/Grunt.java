@@ -2,15 +2,11 @@ package guys;
 import world.Object3D;
 import world.Named;
 import guys.Guy;
-import linalg.StatePair;
 import linalg.Vec3;
-import common.CardinalDirection;
+import linalg.StatePair;
 import java.lang.Math;
 
 public class Grunt extends Guy implements Named {
-	@Override
-	public void tick(float dt) {}
-
 	@Override
 	public String getName() {
 		return "Grunt";
@@ -18,34 +14,23 @@ public class Grunt extends Guy implements Named {
 
 	@Override
 	public String describeSituation() { 
-		return "It's a disaster!";
-	}
-
-	@Override
-	public CardinalDirection resolveDirection() {
-		Vec3 direction = orientation.getValue();
-		double heading = Math.atan2(direction.getY(), direction.getX());
-		heading *= 1. / Math.PI ;
-		if (heading < .0) heading += 2.;
-		heading += .125;
-		heading *= 4.;
-		
-		int headingIndex = (int)heading;
-		return CardinalDirection.fromIndex(headingIndex);
-	}
-
-	@Override
-	public Vec3 resolveDirectionVector() {
-		return orientation.getValue();
+		if (Math.random() < 0.5)
+			return "It's a disaster!";
+		return "Life will never be the same as it used to be";
 	}
 
 	public final String grumble() { 
 		return "*Grumbling sounds*";
 	}
 
-	public Grunt() {
-		position    = new StatePair();
-		orientation = new StatePair();
+	@Override
+	public String toString() {
+		return "Cool guy with panama by the name of Grunt";
+	}
+
+	public Grunt(StatePair position, StatePair orientation) {
+		this.position    = new StatePair(position);
+		this.orientation = new StatePair(orientation);
 	}
 
 }

@@ -1,0 +1,57 @@
+Balloon is following path and now at position X: 9.629 Y: 1.083 Z: 8.876
+Nobody in now looking at Regular one
+Balloon is now at position X: 0.000 Y: 2.000 Z: 0.000
+Balloon is now at position X: 8.329 Y: 1.371 Z: 8.443
+Nobody is pointing at NorthBalloon is following path and now at position X: 7.958 Y: 1.454 Z: 8.319
+Regular one is pointing at NorthBalloon is following path and now at position X: 0.000 Y: 2.000 Z: 0.000
+Balloon is now affected by a 1.937 m/s wind
+Nobody is pointing at EastNobody is pointing at North westBalloon is now at position X: 0.000 Y: 2.000 Z: 0.000
+Grunt in now looking at Nobody
+Nobody in now looking at Fancy flying machine
+Nobody is pointing at EastRegular one is here, and he thinks: "Amma just a usual guy"
+Balloon now has Orange flame color
+Balloon is now affected by a 2.680 m/s wind
+Balloon now has Light blue flame color
+Nobody in now looking at Regular one
+Nobody is pointing at North westBalloon now has Pink flame color
+Balloon now has Light blue flame color
+Grunt is here, and he thinks: "Life will never be the same as it used to be"
+Nobody is pointing at North westGrunt is pointing at EastRegular one in now looking at Cool guy with panama by the name of Grunt
+Regular one in now looking at Nobody
+Balloon is following path and now at position X: 4.245 Y: 2.279 Z: 7.082
+Balloon is following path and now at position X: 3.873 Y: 2.361 Z: 6.958
+Nobody is pointing at North eastBalloon is now affected by a 2.605 m/s wind
+Grunt is here, and he thinks: "It's a disaster!"
+Regular one is here, and he thinks: "Amma just a usual guy"
+Regular one in now looking at Regular one
+Regular one is here, and he thinks: "Amma just a usual guy"
+Balloon is now affected by a 2.106 m/s wind
+Grunt is here, and he thinks: "Life will never be the same as it used to be"
+Nobody is here, and he thinks: "Life is not that bad"
+Grunt is here, and he thinks: "It's a disaster!"
+Nobody is pointing at EastNobody is pointing at North westBalloon is now affected by a 2.538 m/s wind
+Grunt is here, and he thinks: "Life will never be the same as it used to be"
+Grunt in now looking at Nobody
+Regular one in now looking at Fancy flying machine
+Balloon is following path and now at position X: 0.000 Y: 2.000 Z: 6.000
+Balloon is now affected by a 1.256 m/s wind
+Balloon is following path and now at position X: 1.000 Y: 3.000 Z: 5.495
+Balloon is now at position X: 1.000 Y: 3.000 Z: 5.495
+Balloon is now affected by a 2.219 m/s wind
+Nobody is pointing at North eastBalloon is now at position X: 1.000 Y: 3.000 Z: 4.695
+Balloon now has Lime flame color
+Grunt in now looking at Nobody
+Balloon now has Yellow flame color
+Grunt is here, and he thinks: "It's a disaster!"
+Nobody is here, and he thinks: "Life is not that bad"
+Nobody in now looking at Regular one
+Regular one is pointing at South eastNobody in now looking at Regular one
+Regular one is pointing at North westGrunt in now looking at Regular one
+Regular one in now looking at Fancy flying machine
+Balloon now has Blue flame color
+Grunt is pointing at EastNobody is here, and he thinks: "Amma just a usual guy"
+Grunt is pointing at EastNobody is pointing at North westNobody is pointing at North eastNobody in now looking at Regular one
+Grunt is pointing at EastGrunt in now looking at Cool guy with panama by the name of Grunt
+Regular one in now looking at Cool guy with panama by the name of Grunt
+Nobody is pointing at North westGrunt in now looking at Fancy flying machine
+Nobody is here, and he thinks: "Amma just a usual guy"

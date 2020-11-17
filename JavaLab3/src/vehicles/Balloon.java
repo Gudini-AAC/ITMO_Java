@@ -24,8 +24,9 @@ public class Balloon extends FlyingVehicle implements Named {
 			position.setValue(newPosition);
 		}
 		else {
-			position.integrate(dt);
+			position.setValue(Vec3.mul(Vec3.sub(position.getDerivative(), windSpeed), dt));
 		}
+		orientation.integrate(dt);
 	}
 
 	@Override
@@ -63,10 +64,22 @@ public class Balloon extends FlyingVehicle implements Named {
 		return currentPath != null;
 	}
 
-
 	@Override
 	public void setWind(Vec3 windSpeed) {
-		this.windSpeed = new Vec3(windSpeed);
+		this.windSpeed = windSpeed;
+	}
+
+	@Override
+	public String toString() {
+		return "Fancy flying machine";
+	}
+
+	public void setFlameColor(Color color) {
+		flameColor = color;
+	}
+
+	public Color getFlameColor() {
+		return flameColor;
 	}
 
 	public Balloon(StatePair position, StatePair orientation) {

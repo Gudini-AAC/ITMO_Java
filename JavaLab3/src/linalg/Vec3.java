@@ -101,6 +101,15 @@ public class Vec3 {
 		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
 
+	public static final Vec3 makeRandom(float min, float max) {
+		Vec3 ret = new Vec3();
+		float amplitude = max - min;
+		ret.x = (float)Math.random() * amplitude + min;
+		ret.y = (float)Math.random() * amplitude + min;
+		ret.z = (float)Math.random() * amplitude + min;
+		return ret;
+	}
+
 	public final float getX() { return x; }
 	public final float getY() { return y; }
 	public final float getZ() { return z; }
