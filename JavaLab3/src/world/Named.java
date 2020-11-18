@@ -3,7 +3,7 @@ package world;
 /**
 * @brief Gives access to an entity specific name
 */
-interface Named {
+public interface Named {
 	/**
 	* @return Entity specif name
 	*/

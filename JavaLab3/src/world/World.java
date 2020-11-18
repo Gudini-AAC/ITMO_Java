@@ -3,12 +3,14 @@ import java.util.ArrayList;
 import java.lang.Math;
 import world.Object3D;
 import guys.Guy;
+import guys.Grunt;
 import world.Simulatable;
 import linalg.Vec3;
 import vehicles.Vehicle;
 import vehicles.FlyingVehicle;
 import vehicles.Balloon;
 import common.Color;
+import java.util.Optional;
 
 /**
 * @brief world that can hold objects and simulate their behavior in space-time domain
@@ -85,6 +87,14 @@ public class World {
 						name, position.getX(), position.getY(), position.getZ());
 				}
 
+				if (object instanceof Vehicle && Math.random() < .05) {
+					Optional<Guy> guy = ((Vehicle)object).kickOutLast();
+					if (guy.isPresent())
+						System.out.printf("%s been kicked out of %s", guy.toString(), name);
+					else
+						System.out.printf("Nobody been kicked out of %s", name);
+				}
+
 				if (object instanceof FlyingVehicle && Math.random() < .05) {
 					Vec3 windSpeed = Vec3.makeRandom(-2.f, 2.f);
 					System.out.printf("%s is now affected by a %.3f m/s wind\n", name, windSpeed.length());
@@ -92,11 +102,14 @@ public class World {
 				}
 
 				if (object instanceof Balloon && Math.random() < .05) {
-					Color color = Color.makeRandom();
+					((Balloon)object).setFlameColor(Color.makeRandom());
+					Color color = ((Balloon)object).getFlameColor();
 					System.out.printf("%s now has %s flame color\n", name, color.toString());
-					((Balloon)object).setFlameColor(color);
 				}
 				
+				if (object instanceof Grunt && Math.random() < .05) {
+					System.out.printf("%s makes %s\n", name, ((Grunt)object).grumble());
+				}
 			}
 
 		}

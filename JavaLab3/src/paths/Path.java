@@ -11,17 +11,17 @@ public interface Path {
 	* @param t Percentage of the path
 	* @return Point on the path
 	*/
-	public Vec3 interpolate(float t);
+	Vec3 interpolate(float t);
 
 	/**
 	* @brief Add point to the path
 	* @param point Point to add
 	*/
-	public void addPoint(Vec3 point);
+	void addPoint(Vec3 point);
 
 	/**
 	* @brief Claculate length of the path
 	* @return Length of the path
 	*/
-	public float length();
+	float length();
 }

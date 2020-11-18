@@ -22,13 +22,14 @@ public class ManhattanPath implements Path {
 	public Vec3 interpolate(float t) {
 		float aim = length() * t;
 
-		int i = 0;
-		float len = 0.f;
-		while (len < aim && i < points.size()) {
+		int i = 0; // Index of the next point
+		float len = 0.f; // Length of the path up to next point
+		while (len < aim && i < points.size()) {// Trivial calculations of the length
 			i++;
 			len += manhattanLength(Vec3.sub(points.get(i - 1), points.get(i)));	
 		}
 		
+		// Just return second to current point
 		return points.get(i - 1);
 	}
 

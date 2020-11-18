@@ -5,7 +5,7 @@ import linalg.Vec3;
 /**
 * @brief Gives access to an entity with a distinct direction in the world frame 
 */
-interface Directed {
+public interface Directed {
 	
 	/**
 	* @return Cardinal direction of the entity

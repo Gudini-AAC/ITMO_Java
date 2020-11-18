@@ -34,6 +34,7 @@ public class BezierPath implements Path {
 		float currentSegmentLen = currentSegment.length();
 		currentSegment.mul((aim + currentSegmentLen - len) / currentSegmentLen);
 
+		// Return interpolated point
 		return Vec3.add(points.get(i - 1), currentSegment);
 	}
 
