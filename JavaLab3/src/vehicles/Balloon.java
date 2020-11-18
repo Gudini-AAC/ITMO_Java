@@ -55,8 +55,8 @@ public class Balloon extends FlyingVehicle implements Named {
 	public Optional<Guy> kickOutLast() {
 		if (guysCount == 0)
 			return Optional.empty();
- 
-		return Optional.of(guys[guysCount--]);
+		
+		return Optional.of(guys[--guysCount]);
 	}
 
 	@Override

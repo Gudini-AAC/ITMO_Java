@@ -60,8 +60,15 @@ public class World {
 				}
 
 				// Just use the functionality provided by the object...
-				if (object instanceof Directed && Math.random() < .05)
-					System.out.printf("%s is pointing at %s", name, ((Directed)object).resolveDirection().toString());
+				if (object instanceof Directed && Math.random() < .05) {
+					if (Math.random() < .5)
+						System.out.printf("%s is pointing at %s", name, ((Directed)object).resolveDirection().toString());
+					else  {
+						Vec3 direction = ((Directed)object).resolveDirectionVector();
+						System.out.printf("%s has a direction X: %.3f Y: %.3f Z: %.3f\n",
+						name, direction.getX(), direction.getY(), direction.getZ());
+					}
+				}
 
 				if (object instanceof Guy && Math.random() < .05)
 					System.out.printf("%s is here, and he thinks: \"%s\"\n", name, ((Guy)object).describeSituation());
@@ -90,9 +97,9 @@ public class World {
 				if (object instanceof Vehicle && Math.random() < .05) {
 					Optional<Guy> guy = ((Vehicle)object).kickOutLast();
 					if (guy.isPresent())
-						System.out.printf("%s been kicked out of %s", guy.toString(), name);
+						System.out.printf("%s been kicked out of %s\n", guy.toString(), name);
 					else
-						System.out.printf("Nobody been kicked out of %s", name);
+						System.out.printf("Nobody been kicked out of %s\n", name);
 				}
 
 				if (object instanceof FlyingVehicle && Math.random() < .05) {

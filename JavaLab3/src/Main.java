@@ -36,8 +36,10 @@ public class Main {
 
 			Vehicle balloon = new Balloon(new StatePair(new Vec3(), new Vec3(-1, 0, 0)), new StatePair());
 			balloon.followPath(path);
-			balloon.trySit(new Guy());
-			balloon.trySit(new Guy());
+			boolean allAreSitting = true;
+			allAreSitting |= balloon.trySit(new Guy());
+			allAreSitting |= balloon.trySit(new Guy());
+			System.out.print(allAreSitting ? "All of the guys are in the balloon\n" : "Guys are out of the balloon\n");
 			world.addWorldObject(balloon);
 		}
 
