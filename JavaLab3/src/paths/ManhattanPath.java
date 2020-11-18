@@ -3,7 +3,16 @@ import java.util.ArrayList;
 import linalg.Vec3;
 import paths.Path;
 
+
+/**
+* @brief Grid-alligned path
+*/
 public class ManhattanPath implements Path {
+
+	/**
+	* @brief Construct path with a certan grid stze
+	* @param gridSize Size of the grid
+	*/
 	public ManhattanPath(float gridSize) {
 		this.gridSize = gridSize;
 		this.points = new ArrayList<Vec3>();
@@ -31,6 +40,10 @@ public class ManhattanPath implements Path {
 		return ret;
 	}
 
+	/**
+	* @brief Adds a point to a path
+	* @param point Point to add to the path
+	*/
 	public void addPoint(Vec3 point) {
 		Vec3 pointOnGrid = new Vec3();
 
@@ -41,6 +54,11 @@ public class ManhattanPath implements Path {
 		points.add(pointOnGrid);
 	}
 
+	/**
+	* @brief Sum of all components of the vector
+	* @param vec Vector in length of which we are interested in
+	* @return Length of the vector
+	*/
 	private float manhattanLength(Vec3 vec) {
 		float ret = 0.f;
 		ret += Math.abs(vec.getX());

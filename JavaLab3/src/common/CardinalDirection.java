@@ -18,6 +18,12 @@ public enum CardinalDirection {
 		this.direction = direction;
 	}
 
+	/**
+	* @brief Makes cardinal direction from index starting from east
+	* @param index Index int the range [0; 7]
+	* @return cardinal direction that corresponds to the Index
+	* @throws IndexOutOfBoundsException
+	*/
 	public static CardinalDirection fromIndex(int index) {
 		switch(index) {
 			case 0: return CardinalDirection.EAST;

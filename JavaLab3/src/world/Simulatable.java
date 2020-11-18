@@ -4,7 +4,7 @@ package world;
 /**
 * @brief Interface to an object that can be simulated in space-time domain
 */
-public interface Simulatable {
+interface Simulatable {
 	
 	/**
 	* @param dt Delta of time

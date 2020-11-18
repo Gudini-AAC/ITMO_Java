@@ -5,16 +5,16 @@ import linalg.Vec3;
 /**
 * @brief Gives access to an entity with a distinct direction in the world frame 
 */
-public interface Directed {
+interface Directed {
 	
 	/**
 	* @return Cardinal direction of the entity
 	*/
-	public CardinalDirection resolveDirection();
+	CardinalDirection resolveDirection();
 
 	/**
 	* @return Direction vector
 	*/
-	public Vec3 resolveDirectionVector();
+	Vec3 resolveDirectionVector();
 
 }

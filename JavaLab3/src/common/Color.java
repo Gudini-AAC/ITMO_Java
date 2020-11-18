@@ -22,6 +22,10 @@ public enum Color {
 		this.color = color;
 	}
 
+	/**
+	* @brief Makes random color
+	* @return Random color
+	*/
 	public static Color makeRandom() {
 		int id = (int)(Math.random() * 13.);
 

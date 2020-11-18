@@ -7,11 +7,26 @@ import linalg.StatePair;
 import common.CardinalDirection;
 import java.lang.Math;
 
+/**
+* @brief Represents Homo Sapiens in this rude world
+*/
 public class Guy extends Object3D implements Directed, Simulatable {
+
+	/**
+	* @return String that expresses current ideas of the creature about the world
+	*/
 	public String describeSituation() { 
 		if (Math.random() < .5)
 			return "Amma just a usual guy";
 		return "Life is not that bad";
+	}
+
+	/**
+	* @param point Object in the world to look at
+	* @return Eye vector
+	*/
+	public Vec3 lookAt(Object3D point) {
+		return Vec3.sub(point.getPosition().getValue(), position.getValue());
 	}
 
 	@Override
@@ -38,10 +53,6 @@ public class Guy extends Object3D implements Directed, Simulatable {
 		return orientation.getValue();
 	}
 
-	public Vec3 lookAt(Object3D point) {
-		return Vec3.sub(point.getPosition().getValue(), position.getValue());
-	}
-
 	@Override
 	public String toString() {
 		if (Math.random() < .5)
@@ -49,6 +60,9 @@ public class Guy extends Object3D implements Directed, Simulatable {
 		return "Nobody";
 	}
 
+	/**
+	* @brief Default-initialized guy that looks at south and has random position and orientation
+	*/
 	public Guy() {
 		eyeDirection = new Vec3(1, 0, 0);
 		position     = StatePair.makeRandom(-3.14f, 3.14f);

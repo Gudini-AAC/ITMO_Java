@@ -8,24 +8,31 @@ import linalg.StatePair;
 import java.util.Optional;
 import common.Color;
 
+/**
+* @brief A large bag filled with hot air
+*/
 public class Balloon extends FlyingVehicle implements Named {
 	@Override
 	public void tick(float dt) {
-		if (currentPath != null) {
-			Vec3 newPosition = new Vec3();
+
+		if (currentPath != null) { //Check if we are following path
+			Vec3 newPosition;
 			currentPathTime += dt;
-			if (currentPathTime < totalPathTime) {
+
+			if (currentPathTime < totalPathTime) { //Path is not finished yet
 				newPosition = currentPath.interpolate(currentPathTime / totalPathTime);
 			}
-			else {
+			else { //Path is finished
 				newPosition = currentPath.interpolate(1.f);
 				currentPath = null;
 			}
+
 			position.setValue(newPosition);
 		}
-		else {
+		else { //Just integrate the position
 			position.setValue(Vec3.mul(Vec3.sub(position.getDerivative(), windSpeed), dt));
 		}
+
 		orientation.integrate(dt);
 	}
 
@@ -74,14 +81,27 @@ public class Balloon extends FlyingVehicle implements Named {
 		return "Fancy flying machine";
 	}
 
+	/**
+	* @brief Sets the color of the flame
+	* @param color Color to set
+	*/
 	public void setFlameColor(Color color) {
 		flameColor = color;
 	}
 
+	/**
+	* @brief Retrieves the color of the flame
+	* @return Color of the flame
+	*/
 	public Color getFlameColor() {
 		return flameColor;
 	}
 
+	/**
+	* @brief Creates Balloon with a certan position and orientation
+	* @param position
+	* @param orientation
+	*/
 	public Balloon(StatePair position, StatePair orientation) {
 		this.position    = new StatePair(position);
 		this.orientation = new StatePair(orientation);

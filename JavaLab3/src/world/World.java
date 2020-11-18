@@ -10,13 +10,23 @@ import vehicles.FlyingVehicle;
 import vehicles.Balloon;
 import common.Color;
 
+/**
+* @brief world that can hold objects and simulate their behavior in space-time domain
+*/
 public class World {
-
+	
+	/**
+	* @brief Default-initialized empty world
+	*/
 	public World() {
 		simulatableObjects = new ArrayList<Simulatable>();
 		staticObjects = new ArrayList<Object3D>();
 	}
 
+	/**
+	* @brief Add object to the world
+	* @param object Either static or simulateble object
+	*/
 	public void addWorldObject(Object3D object) {
 		if (object instanceof Simulatable) 
 			simulatableObjects.add((Simulatable)object);
@@ -25,13 +35,20 @@ public class World {
 			
 	}
 
+	/**
+	* @brief Run simulation of the world
+	* @param seconds Simulation time
+	* @param dt Delta of time
+	*/
 	public void run(float seconds, float dt) {
 
 		for (float time = 0.f; time < seconds; time += dt) {
-
+			
+			// Simulate all of the simulateble objects
 			for (Simulatable object : simulatableObjects) {
 				object.tick(dt);
 
+				// Find the name of the object. Either its name provided by Named interface or toString method
 				String name;
 				if (object instanceof Named) {
 					name = ((Named)object).getName();
@@ -40,6 +57,7 @@ public class World {
 					name = object.toString();
 				}
 
+				// Just use the functionality provided by the object...
 				if (object instanceof Directed && Math.random() < .05)
 					System.out.printf("%s is pointing at %s", name, ((Directed)object).resolveDirection().toString());
 
