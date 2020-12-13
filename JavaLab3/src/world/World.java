@@ -4,6 +4,8 @@ import java.lang.Math;
 import world.Object3D;
 import guys.Guy;
 import guys.Grunt;
+import guys.Dunno;
+import guys.GlassEye;
 import world.Simulatable;
 import linalg.Vec3;
 import vehicles.Vehicle;
@@ -22,7 +24,7 @@ public class World {
 	*/
 	public World() {
 		simulatableObjects = new ArrayList<Simulatable>();
-		staticObjects = new ArrayList<Object3D>();
+		staticObjects      = new ArrayList<Object3D>();
 	}
 
 	/**
@@ -61,10 +63,12 @@ public class World {
 
 				// Just use the functionality provided by the object...
 				if (object instanceof Directed && Math.random() < .05) {
-					if (Math.random() < .5)
-						System.out.printf("%s is pointing at %s", name, ((Directed)object).resolveDirection().toString());
-					else  {
+					if (Math.random() < .5) {
+						System.out.printf("%s is pointing at %s\n", name, ((Directed)object).resolveDirection().toString());
+					}
+					else {
 						Vec3 direction = ((Directed)object).resolveDirectionVector();
+
 						System.out.printf("%s has a direction X: %.3f Y: %.3f Z: %.3f\n",
 						name, direction.getX(), direction.getY(), direction.getZ());
 					}
@@ -75,8 +79,10 @@ public class World {
 
 				if (object instanceof Guy && Math.random() < .05) {
 					int index = (int)(Math.random() * simulatableObjects.size()) % simulatableObjects.size();
+
 					if (simulatableObjects.get(index) instanceof Object3D) {
 						Object3D target = (Object3D)simulatableObjects.get(index);
+
 						System.out.printf("%s in now looking at %s\n", name, target.toString());
 						((Guy)object).lookAt(target);
 					}
@@ -84,12 +90,14 @@ public class World {
 
 				if (object instanceof Vehicle && ((Vehicle)object).isFollowingPath() && Math.random() < .05) {
 					Vec3 position = ((Vehicle)object).getPosition().getValue();
+
 					System.out.printf("%s is following path and now at position X: %.3f Y: %.3f Z: %.3f\n",
 						name, position.getX(), position.getY(), position.getZ());
 				}
 
 				if (object instanceof Vehicle && Math.random() < .05) {
 					Vec3 position = ((Vehicle)object).getPosition().getValue();
+
 					System.out.printf("%s is now at position X: %.3f Y: %.3f Z: %.3f\n",
 						name, position.getX(), position.getY(), position.getZ());
 				}
@@ -104,6 +112,7 @@ public class World {
 
 				if (object instanceof FlyingVehicle && Math.random() < .05) {
 					Vec3 windSpeed = Vec3.makeRandom(-2.f, 2.f);
+
 					System.out.printf("%s is now affected by a %.3f m/s wind\n", name, windSpeed.length());
 					((FlyingVehicle)object).setWind(windSpeed);
 				}
@@ -111,12 +120,25 @@ public class World {
 				if (object instanceof Balloon && Math.random() < .05) {
 					((Balloon)object).setFlameColor(Color.makeRandom());
 					Color color = ((Balloon)object).getFlameColor();
+
 					System.out.printf("%s now has %s flame color\n", name, color.toString());
 				}
 				
 				if (object instanceof Grunt && Math.random() < .05) {
 					System.out.printf("%s makes %s\n", name, ((Grunt)object).grumble());
 				}
+
+				if (object instanceof GlassEye && Math.random() < .05) {
+					int index = (int)(Math.random() * simulatableObjects.size()) % simulatableObjects.size();
+
+					if (simulatableObjects.get(index) instanceof Object3D) {
+						Object3D target = (Object3D)simulatableObjects.get(index);
+
+						System.out.printf("%s looks through his telescope at %s: \"%s\"\n", name, target.toString(),
+							((GlassEye)object).lookThroughTelescope(target));
+					}
+				}
+
 			}
 
 		}

@@ -2,6 +2,8 @@ import world.World;
 import vehicles.Balloon;
 import vehicles.Vehicle;
 import guys.Grunt;
+import guys.Dunno;
+import guys.GlassEye;
 import guys.Guy;
 import linalg.Vec3;
 import linalg.StatePair;
@@ -44,6 +46,8 @@ public class Main {
 		}
 
 		world.addWorldObject(new Grunt(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
+		world.addWorldObject(new Dunno(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
+		world.addWorldObject(new GlassEye(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Guy());
 		world.addWorldObject(new Guy());
 		world.addWorldObject(new Guy());
