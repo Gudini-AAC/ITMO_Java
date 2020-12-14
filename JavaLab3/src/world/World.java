@@ -3,8 +3,12 @@ import java.util.ArrayList;
 import java.lang.Math;
 import world.Object3D;
 import guys.Guy;
+import guys.Crowd;
 import guys.Grunt;
+import guys.RolyPoly;
 import guys.Dunno;
+import guys.Doono;
+import guys.NothingToEatException;
 import guys.GlassEye;
 import world.Simulatable;
 import linalg.Vec3;
@@ -56,17 +60,15 @@ public class World {
 				String name;
 				if (object instanceof Named) {
 					name = ((Named)object).getName();
-				}
-				else {
+				} else {
 					name = object.toString();
 				}
 
 				// Just use the functionality provided by the object...
-				if (object instanceof Directed && Math.random() < .05) {
+				if (object instanceof Directed && Math.random() < threshold) {
 					if (Math.random() < .5) {
 						System.out.printf("%s is pointing at %s\n", name, ((Directed)object).resolveDirection().toString());
-					}
-					else {
+					} else {
 						Vec3 direction = ((Directed)object).resolveDirectionVector();
 
 						System.out.printf("%s has a direction X: %.3f Y: %.3f Z: %.3f\n",
@@ -74,10 +76,10 @@ public class World {
 					}
 				}
 
-				if (object instanceof Guy && Math.random() < .05)
+				if (object instanceof Guy && Math.random() < threshold)
 					System.out.printf("%s is here, and he thinks: \"%s\"\n", name, ((Guy)object).describeSituation());
 
-				if (object instanceof Guy && Math.random() < .05) {
+				if (object instanceof Guy && Math.random() < threshold) {
 					int index = (int)(Math.random() * simulatableObjects.size()) % simulatableObjects.size();
 
 					if (simulatableObjects.get(index) instanceof Object3D) {
@@ -88,47 +90,47 @@ public class World {
 					}
 				}
 
-				if (object instanceof Vehicle && ((Vehicle)object).isFollowingPath() && Math.random() < .05) {
+				if (object instanceof Vehicle && ((Vehicle)object).isFollowingPath() && Math.random() < threshold) {
 					Vec3 position = ((Vehicle)object).getPosition().getValue();
 
 					System.out.printf("%s is following path and now at position X: %.3f Y: %.3f Z: %.3f\n",
 						name, position.getX(), position.getY(), position.getZ());
 				}
 
-				if (object instanceof Vehicle && Math.random() < .05) {
+				if (object instanceof Vehicle && Math.random() < threshold) {
 					Vec3 position = ((Vehicle)object).getPosition().getValue();
 
 					System.out.printf("%s is now at position X: %.3f Y: %.3f Z: %.3f\n",
 						name, position.getX(), position.getY(), position.getZ());
 				}
 
-				if (object instanceof Vehicle && Math.random() < .05) {
+				if (object instanceof Vehicle && Math.random() < threshold) {
 					Optional<Guy> guy = ((Vehicle)object).kickOutLast();
 					if (guy.isPresent())
-						System.out.printf("%s been kicked out of %s\n", guy.toString(), name);
+						System.out.printf("%s been kicked out of %s\n", guy.get().toString(), name);
 					else
 						System.out.printf("Nobody been kicked out of %s\n", name);
 				}
 
-				if (object instanceof FlyingVehicle && Math.random() < .05) {
+				if (object instanceof FlyingVehicle && Math.random() < threshold) {
 					Vec3 windSpeed = Vec3.makeRandom(-2.f, 2.f);
 
 					System.out.printf("%s is now affected by a %.3f m/s wind\n", name, windSpeed.length());
 					((FlyingVehicle)object).setWind(windSpeed);
 				}
 
-				if (object instanceof Balloon && Math.random() < .05) {
+				if (object instanceof Balloon && Math.random() < threshold) {
 					((Balloon)object).setFlameColor(Color.makeRandom());
 					Color color = ((Balloon)object).getFlameColor();
 
 					System.out.printf("%s now has %s flame color\n", name, color.toString());
 				}
 				
-				if (object instanceof Grunt && Math.random() < .05) {
+				if (object instanceof Grunt && Math.random() < threshold) {
 					System.out.printf("%s makes %s\n", name, ((Grunt)object).grumble());
 				}
 
-				if (object instanceof GlassEye && Math.random() < .05) {
+				if (object instanceof GlassEye && Math.random() < threshold) {
 					int index = (int)(Math.random() * simulatableObjects.size()) % simulatableObjects.size();
 
 					if (simulatableObjects.get(index) instanceof Object3D) {
@@ -136,6 +138,23 @@ public class World {
 
 						System.out.printf("%s looks through his telescope at %s: \"%s\"\n", name, target.toString(),
 							((GlassEye)object).lookThroughTelescope(target));
+					}
+				}
+
+				if (object instanceof Doono && Math.random() < threshold) {
+					System.out.printf("%s gives a speech: \n\t\"%s\"\n", name, ((Doono)object).giveASpeech());
+				}
+
+				if (object instanceof Crowd && Math.random() < threshold) {
+					System.out.printf("%s shouted: \"%s\"\n", name, ((Crowd)object).shoutOutLoud());
+				}
+
+				if (object instanceof RolyPoly && Math.random() < threshold) {
+					try {
+						String mealName = ((RolyPoly)object).eatMealFromStorage();
+						System.out.printf("%s have eated his %s. %d to eat", name, mealName, ((RolyPoly)object).countMealsToEat());
+					} catch (NothingToEatException e) {
+						System.out.printf("%s coludn't eat his meal, because", name, e.getMessage());
 					}
 				}
 
@@ -147,4 +166,5 @@ public class World {
 
 	private ArrayList<Simulatable> simulatableObjects;
 	private ArrayList<Object3D> staticObjects;
+	private static final double threshold = .02;
 }

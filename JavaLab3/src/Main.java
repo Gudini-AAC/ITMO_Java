@@ -3,8 +3,12 @@ import vehicles.Balloon;
 import vehicles.Vehicle;
 import guys.Grunt;
 import guys.Dunno;
+import guys.Doono;
+import guys.RolyPoly;
 import guys.GlassEye;
 import guys.Guy;
+import guys.Crowd;
+import guys.TooBigOfACrowdException;
 import linalg.Vec3;
 import linalg.StatePair;
 import paths.Path;
@@ -45,9 +49,24 @@ public class Main {
 			world.addWorldObject(balloon);
 		}
 
+		{
+			Crowd crowd = new Crowd();	
+
+			try {
+			crowd.addGuy(new Guy());
+			crowd.addGuy(new Guy());
+			crowd.addGuy(new Guy());
+			crowd.addGuy(new GlassEye(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
+			} catch (TooBigOfACrowdException e) {
+				System.out.println(e.getMessage());
+			}
+			world.addWorldObject(crowd);
+		}
+
 		world.addWorldObject(new Grunt(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Dunno(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
-		world.addWorldObject(new GlassEye(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
+		world.addWorldObject(new Doono(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
+		world.addWorldObject(new RolyPoly(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Guy());
 		world.addWorldObject(new Guy());
 		world.addWorldObject(new Guy());
