@@ -27,7 +27,7 @@ public class Dunno extends Guy implements Named {
 	* @return Exactly what you're expecting - messed up work
 	*/
 	public final String messUp(Work work) { 
-		return work.getDescription() + " successfully messed up!";
+		return work.doWork() + " " + work.getDescription() + " successfully messed up";
 	}
 
 	@Override

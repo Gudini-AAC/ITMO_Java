@@ -6,6 +6,9 @@ import guys.NothingToEatException;
 import linalg.Vec3;
 import linalg.StatePair;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.Comparator;
+import java.util.function.Consumer;
 import java.lang.Math;
 
 /**
@@ -32,14 +35,25 @@ public class RolyPoly extends Guy implements Named {
                 "Pie"
             };
 
-            name = names[(int)(Math.random() * names.length) % names.length];
+            name   = names[(int)(Math.random() * names.length) % names.length];
+            weight = (float)Math.random();
+        }
+
+        public float getWeight() {
+            return weight;
         }
 
         public String getName() {
             return name;
         }
 
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof Meal && weight == ((Meal)other).weight && name.equals(((Meal)other).name);
+        }
+
         private String name;
+        private float weight;
     }
 
     @Override
@@ -51,7 +65,7 @@ public class RolyPoly extends Guy implements Named {
     public String describeSituation() { 
         if (Math.random() < .5)
             return "That stuff is super tasty";
-        return "Do you want some tasty stuff?";
+        return "Do you want some tasty meals?";
     }
 
     @Override
@@ -64,12 +78,21 @@ public class RolyPoly extends Guy implements Named {
     * @throws NothingToEatException if internal storage is empty
     */
     public String eatMealFromStorage() {
-        if (meals.size() == 0)
-            throw new NothingToEatException();
-
         class MealEater {
             public String eat() {
-                return mealsToEat.remove(mealsToEat.size() - 1).getName();
+                Optional<Meal> max = mealsToEat.stream().max(new Comparator<Meal>() {
+                    public int compare(Meal lh, Meal rh) {
+                        if (lh.getWeight() < rh.getWeight()) return -1;
+                        if (lh.getWeight() > rh.getWeight()) return  1;
+                        return 0;
+                    }
+                });
+                
+                if (!max.isPresent())
+                    throw new NothingToEatException();
+
+                mealsToEat.remove(max.get());
+                return max.get().getName();
             }
 
             private ArrayList<Meal> mealsToEat = meals;

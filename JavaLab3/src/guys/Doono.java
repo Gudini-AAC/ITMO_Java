@@ -27,7 +27,7 @@ public class Doono extends Guy implements Named {
     * @return Exactly what you're expecting
     */
     public final String doWork(Work work) { 
-        return work.getDescription() + " is done exceptionally well";
+        return work.doWork() + " " + work.getDescription() + " is done exceptionally well";
     }
 
     public String giveASpeech() {

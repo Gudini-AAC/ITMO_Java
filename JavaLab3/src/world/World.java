@@ -1,22 +1,22 @@
 package world;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.lang.Math;
+import java.lang.RuntimeException;
+import world.Simulatable;
 import world.Object3D;
+import common.Color;
+import linalg.Vec3;
 import guys.Guy;
 import guys.Crowd;
 import guys.Grunt;
 import guys.RolyPoly;
 import guys.Dunno;
 import guys.Doono;
-import guys.NothingToEatException;
 import guys.GlassEye;
-import world.Simulatable;
-import linalg.Vec3;
 import vehicles.Vehicle;
 import vehicles.FlyingVehicle;
 import vehicles.Balloon;
-import common.Color;
-import java.util.Optional;
 
 /**
 * @brief world that can hold objects and simulate their behavior in space-time domain
@@ -136,13 +136,21 @@ public class World {
 					if (simulatableObjects.get(index) instanceof Object3D) {
 						Object3D target = (Object3D)simulatableObjects.get(index);
 
-						System.out.printf("%s looks through his telescope at %s: \"%s\"\n", name, target.toString(),
-							((GlassEye)object).lookThroughTelescope(target));
+						System.out.printf("%s looks through his telescope at %s: \"%s\"\n", name,
+							target.toString(), ((GlassEye)object).lookThroughTelescope(target));
 					}
 				}
 
 				if (object instanceof Doono && Math.random() < threshold) {
-					System.out.printf("%s gives a speech: \n\t\"%s\"\n", name, ((Doono)object).giveASpeech());
+					if (Math.random() < .5) {
+						System.out.printf("%s gives a speech: \n\t\"%s\"\n", name, ((Doono)object).giveASpeech());
+					} else {
+						System.out.printf("%s by %s\n", ((Doono)object).doWork(new Work()), name);
+					}
+				}
+
+				if (object instanceof Dunno && Math.random() < threshold) {
+					System.out.printf("%s by %s\n", ((Dunno)object).messUp(new Work()), name);
 				}
 
 				if (object instanceof Crowd && Math.random() < threshold) {
@@ -152,9 +160,9 @@ public class World {
 				if (object instanceof RolyPoly && Math.random() < threshold) {
 					try {
 						String mealName = ((RolyPoly)object).eatMealFromStorage();
-						System.out.printf("%s have eated his %s. %d to eat", name, mealName, ((RolyPoly)object).countMealsToEat());
-					} catch (NothingToEatException e) {
-						System.out.printf("%s coludn't eat his meal, because", name, e.getMessage());
+						System.out.printf("%s have eated his %s. %d to eat\n", name, mealName, ((RolyPoly)object).countMealsToEat());
+					} catch (RuntimeException e) {
+						System.out.printf("%s coludn't eat his meal, because %s\n", name, e.getMessage());
 					}
 				}
 
