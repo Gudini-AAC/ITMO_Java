@@ -1,57 +1,77 @@
-Balloon is following path and now at position X: 9.629 Y: 1.083 Z: 8.876
-Nobody in now looking at Regular one
-Balloon is now at position X: 0.000 Y: 2.000 Z: 0.000
-Balloon is now at position X: 8.329 Y: 1.371 Z: 8.443
-Nobody is pointing at NorthBalloon is following path and now at position X: 7.958 Y: 1.454 Z: 8.319
-Regular one is pointing at NorthBalloon is following path and now at position X: 0.000 Y: 2.000 Z: 0.000
-Balloon is now affected by a 1.937 m/s wind
-Nobody is pointing at EastNobody is pointing at North westBalloon is now at position X: 0.000 Y: 2.000 Z: 0.000
-Grunt in now looking at Nobody
-Nobody in now looking at Fancy flying machine
-Nobody is pointing at EastRegular one is here, and he thinks: "Amma just a usual guy"
-Balloon now has Orange flame color
-Balloon is now affected by a 2.680 m/s wind
-Balloon now has Light blue flame color
-Nobody in now looking at Regular one
-Nobody is pointing at North westBalloon now has Pink flame color
-Balloon now has Light blue flame color
-Grunt is here, and he thinks: "Life will never be the same as it used to be"
-Nobody is pointing at North westGrunt is pointing at EastRegular one in now looking at Cool guy with panama by the name of Grunt
-Regular one in now looking at Nobody
-Balloon is following path and now at position X: 4.245 Y: 2.279 Z: 7.082
-Balloon is following path and now at position X: 3.873 Y: 2.361 Z: 6.958
-Nobody is pointing at North eastBalloon is now affected by a 2.605 m/s wind
-Grunt is here, and he thinks: "It's a disaster!"
-Regular one is here, and he thinks: "Amma just a usual guy"
-Regular one in now looking at Regular one
-Regular one is here, and he thinks: "Amma just a usual guy"
-Balloon is now affected by a 2.106 m/s wind
-Grunt is here, and he thinks: "Life will never be the same as it used to be"
+All of the guys are in the balloon
+Balloon is following path and now at position X: 9,629 Y: 1,083 Z: 8,876
+Balloon now has Pink flame color
+RolyPoly is pointing at East
+Balloon is now affected by a 2,389 m/s wind
+Nobody been kicked out of Balloon
+Doono in now looking at Fancy flying machine
+Nobody been kicked out of Balloon
+Dunno is here, and he thinks: "I'm the smartest guy in the simulation! (Not really)"
+Doono gives a speech:
+        "If you think you are real.
+        Secondly, everybody is wrong!
+        We can do it together.
+        Secondly, you are wrong!"
+Nobody has a direction X: -4,947 Y: -5,717 Z: -1,287
+Regular one has a direction X: -6,340 Y: -7,362 Z: -0,688
+Doono gives a speech:
+        "Secondly, you are wrong!
+        If you think you are real.
+        Better don't stand on my way!"
+Nobody been kicked out of Balloon
+Balloon is now affected by a 0,393 m/s wind
+Dunno is here, and he thinks: "I'm the smartest guy in the simulation! (Not really)"
 Nobody is here, and he thinks: "Life is not that bad"
-Grunt is here, and he thinks: "It's a disaster!"
-Nobody is pointing at EastNobody is pointing at North westBalloon is now affected by a 2.538 m/s wind
-Grunt is here, and he thinks: "Life will never be the same as it used to be"
-Grunt in now looking at Nobody
-Regular one in now looking at Fancy flying machine
-Balloon is following path and now at position X: 0.000 Y: 2.000 Z: 6.000
-Balloon is now affected by a 1.256 m/s wind
-Balloon is following path and now at position X: 1.000 Y: 3.000 Z: 5.495
-Balloon is now at position X: 1.000 Y: 3.000 Z: 5.495
-Balloon is now affected by a 2.219 m/s wind
-Nobody is pointing at North eastBalloon is now at position X: 1.000 Y: 3.000 Z: 4.695
-Balloon now has Lime flame color
-Grunt in now looking at Nobody
-Balloon now has Yellow flame color
-Grunt is here, and he thinks: "It's a disaster!"
-Nobody is here, and he thinks: "Life is not that bad"
-Nobody in now looking at Regular one
-Regular one is pointing at South eastNobody in now looking at Regular one
-Regular one is pointing at North westGrunt in now looking at Regular one
-Regular one in now looking at Fancy flying machine
+Grunt is pointing at East
+Grunt makes *Grumbling sounds*
+Regular one is here, and he thinks: "Life is not that bad"
+Nobody been kicked out of Balloon
+Balloon is now affected by a 1,433 m/s wind
 Balloon now has Blue flame color
-Grunt is pointing at EastNobody is here, and he thinks: "Amma just a usual guy"
-Grunt is pointing at EastNobody is pointing at North westNobody is pointing at North eastNobody in now looking at Regular one
-Grunt is pointing at EastGrunt in now looking at Cool guy with panama by the name of Grunt
-Regular one in now looking at Cool guy with panama by the name of Grunt
-Nobody is pointing at North westGrunt in now looking at Fancy flying machine
+Grunt is here, and he thinks: "Life will never be the same as it used to be"
+Doono is here, and he thinks: "Do you know what you're doing with your life?"
+Regular one is here, and he thinks: "Amma just a usual guy"
+Balloon is now at position X: 4,987 Y: 2,114 Z: 7,329
+Grunt in now looking at Crowd of 4 guys
+Crowd of 4 guys shouted: "Amma just a usual guy"
+Crowd of 4 guys shouted: "Amma just a usual guy"
+Dunno is here, and he thinks: "I know everything! (Not really)"
+Balloon is following path and now at position X: 0,000 Y: 2,000 Z: 6,000
+RolyPoly is here, and he thinks: "That stuff is super tasty"
+Nobody is pointing at South west
+Balloon now has Grey flame color
+Balloon is following path and now at position X: 2,017 Y: 2,774 Z: 6,339
+RolyPoly in now looking at Guy that doesn't know anything
+Nobody has a direction X: -14,993 Y: -18,533 Z: -5,868
 Nobody is here, and he thinks: "Amma just a usual guy"
+RolyPoly has a direction X: 0,000 Y: 0,000 Z: 8,800
+RolyPoly is here, and he thinks: "Do you want some tasty stuff?"
+Grunt has a direction X: 0,000 Y: 0,000 Z: 9,400
+RolyPoly have eated his Strawberry. 4 to eatNobody been kicked out of Balloon
+Dunno is pointing at East
+Balloon is now affected by a 1,553 m/s wind
+Dunno is pointing at East
+Nobody is here, and he thinks: "Life is not that bad"
+Regular one in now looking at Regular one
+Grunt is pointing at East
+Doono gives a speech:
+        "Secondly, you are wrong!
+        Better don't stand on my way!"
+Doono is here, and he thinks: "Do you know what you're doing with your life?"
+RolyPoly have eated his Candy. 3 to eatRegular one in now looking at Nobody
+Grunt in now looking at Fancy flying machine
+RolyPoly have eated his Strawberry. 2 to eatNobody is pointing at North west
+Regular one has a direction X: -20,865 Y: -26,113 Z: -9,384
+Balloon is now at position X: 1,000 Y: 3,000 Z: 3,095
+RolyPoly have eated his Lollipop. 1 to eatNobody is here, and he thinks: "Amma just a usual guy"
+Balloon is now at position X: 1,000 Y: 3,000 Z: 2,695
+Doono gives a speech:
+        "Secondly, you are wrong!
+        Secondly, everybody is wrong!
+        Secondly, everybody is wrong!"
+Nobody is here, and he thinks: "Life is not that bad"
+Nobody in now looking at Guy that know a lot of stuff
+Balloon is now at position X: 0,000 Y: 2,000 Z: 6,000
+Nobody is here, and he thinks: "Amma just a usual guy"
+Balloon is now at position X: 1,000 Y: 2,695 Z: 1,000
+Balloon is now at position X: 0,000 Y: 2,000 Z: 6,000
