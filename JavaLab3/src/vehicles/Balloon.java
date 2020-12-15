@@ -21,19 +21,22 @@ public class Balloon extends FlyingVehicle implements Named {
 
 			if (currentPathTime < totalPathTime) { //Path is not finished yet
 				newPosition = currentPath.interpolate(currentPathTime / totalPathTime);
-			}
-			else { //Path is finished
+			} else { //Path is finished
 				newPosition = currentPath.interpolate(1.f);
 				currentPath = null;
 			}
 
 			position.setValue(newPosition);
-		}
-		else { //Just integrate the position
+		} else { //Just integrate the position
 			position.setValue(Vec3.mul(Vec3.sub(position.getDerivative(), windSpeed), dt));
 		}
 
 		orientation.integrate(dt);
+
+		for (int i = 0; i < guysCount; i++) {
+			guys[i].setPosition(position);
+			guys[i].setOrientation(orientation);
+		}
 	}
 
 	@Override
@@ -79,6 +82,48 @@ public class Balloon extends FlyingVehicle implements Named {
 	@Override
 	public String toString() {
 		return "Fancy flying machine";
+	}
+
+	@Override
+	public String vehicleStats() {
+		float height = position.getValue().getZ();
+
+		if (height > 1e5)
+			return "Desintegrated";
+		else if (height > 1.5e4)
+			return "Everything is coated with ice";
+		else if (height > 1e3)
+			return "Water starts condencing on the surfaces";
+
+		return "Everything is ok";
+	}
+
+	@Override
+	public String passengerOpinions() {
+		String ret = "";
+
+		for (int i = 0; i < guysCount; i++) {
+			Guy guy = guys[i];
+
+			String name;
+			if (guy instanceof Named) {
+				name = ((Named)guy).getName();
+			} else {
+				name = guy.toString();
+			}	
+
+			if (Math.random() < .7) {
+				if (!ret.isEmpty()) ret += "\n\t";
+				ret += name + " thinks that \"" + guy.lifeStats() + "\"";
+			} else if (Math.random() < .7) {
+				if (!ret.isEmpty()) ret += "\n\t";
+				ret += name + " thinks that \"" + guy.describeSituation() + "\"";
+			}
+		}
+		
+		if (ret.isEmpty())
+			return "Nothing really is happening";
+		return ret;
 	}
 
 	/**

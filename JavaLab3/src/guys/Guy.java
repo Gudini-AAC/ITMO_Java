@@ -21,6 +21,19 @@ public class Guy extends Object3D implements Directed, Simulatable {
 		return "Life is not that bad";
 	}
 
+	public String lifeStats() {
+		float height = position.getValue().getZ();
+
+		if (height > 1e5)
+			return "It's like vaccume here, imma dead :(";
+		else if (height > 1.5e4)
+			return "It's dead cold out there, my pants are full of ice";
+		else if (height > 1e3)
+			return "It's kinda cold out there";
+
+		return "Everything is ok";
+	}
+
 	/**
 	* @param point Object in the world to look at
 	* @return Eye vector

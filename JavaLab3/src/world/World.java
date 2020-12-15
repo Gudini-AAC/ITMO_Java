@@ -76,8 +76,15 @@ public class World {
 					}
 				}
 
-				if (object instanceof Guy && Math.random() < threshold)
-					System.out.printf("%s is here, and he thinks: \"%s\"\n", name, ((Guy)object).describeSituation());
+				if (object instanceof Guy && Math.random() < threshold) {
+					if (Math.random() < .5) {
+						System.out.printf("%s is here, and he thinks: \"%s\"\n", name,
+							((Guy)object).describeSituation());
+					} else {
+						System.out.printf("%s thinks about his life: \"%s\"\n", name,
+							((Guy)object).lifeStats());
+					}
+				}
 
 				if (object instanceof Guy && Math.random() < threshold) {
 					int index = (int)(Math.random() * simulatableObjects.size()) % simulatableObjects.size();
@@ -105,6 +112,11 @@ public class World {
 				}
 
 				if (object instanceof Vehicle && Math.random() < threshold) {
+					System.out.printf("Passangers in the %s think: \n\t\"%s\"\n",
+						name, ((Vehicle)object).passengerOpinions());
+				}
+
+				if (object instanceof Vehicle && Math.random() < threshold) {
 					Optional<Guy> guy = ((Vehicle)object).kickOutLast();
 					if (guy.isPresent())
 						System.out.printf("%s been kicked out of %s\n", guy.get().toString(), name);
@@ -117,6 +129,10 @@ public class World {
 
 					System.out.printf("%s is now affected by a %.3f m/s wind\n", name, windSpeed.length());
 					((FlyingVehicle)object).setWind(windSpeed);
+				}
+
+				if (object instanceof FlyingVehicle && Math.random() < threshold) {
+					System.out.printf("%s stats: %s\n", name, ((Vehicle)object).vehicleStats());
 				}
 
 				if (object instanceof Balloon && Math.random() < threshold) {

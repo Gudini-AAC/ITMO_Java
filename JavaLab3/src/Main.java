@@ -23,24 +23,28 @@ public class Main {
 
 		{
 			Path path = new ManhattanPath(2);
-			path.addPoint(new Vec3(1, 1, 1));
-			path.addPoint(new Vec3(1, 3, 1));
-			path.addPoint(new Vec3(1, 3, 6));
-			path.addPoint(new Vec3(10, 1, 9));
+			path.addPoint(new Vec3(1, 1, 999));
+			path.addPoint(new Vec3(1, 3, 1010));
+			path.addPoint(new Vec3(1, 3, 6000));
+			path.addPoint(new Vec3(10, 1, 9000));
 
 			Vehicle balloon = new Balloon(new StatePair(new Vec3(), new Vec3(1, 1, 0)), new StatePair());
 			balloon.followPath(path);
+			boolean allAreSitting = true;
+			allAreSitting |= balloon.trySit(new Dunno(new StatePair(), new StatePair()));
+			allAreSitting |= balloon.trySit(new RolyPoly(new StatePair(), new StatePair()));
+			System.out.print(allAreSitting ? "All of the guys are in the balloon\n" : "Guys are out of the balloon\n");
 			world.addWorldObject(balloon);
 		}
 
 		{
 			Path path = new BezierPath();
-			path.addPoint(new Vec3(10, 1, 9));
-			path.addPoint(new Vec3(1, 3, 6));
-			path.addPoint(new Vec3(1, 3, 1));
-			path.addPoint(new Vec3(1, 1, 1));
+			path.addPoint(new Vec3(10, 1, 9000));
+			path.addPoint(new Vec3(1, 3, 6000));
+			path.addPoint(new Vec3(1, 3, 1001));
+			path.addPoint(new Vec3(1, 1, 999));
 
-			Vehicle balloon = new Balloon(new StatePair(new Vec3(), new Vec3(-1, 0, 0)), new StatePair());
+			Vehicle balloon = new Balloon(new StatePair(new Vec3(), new Vec3(-1, 0, 1000)), new StatePair());
 			balloon.followPath(path);
 			boolean allAreSitting = true;
 			allAreSitting |= balloon.trySit(new Guy());
@@ -53,10 +57,10 @@ public class Main {
 			Crowd crowd = new Crowd();	
 
 			try {
-			crowd.addGuy(new Guy());
-			crowd.addGuy(new Guy());
-			crowd.addGuy(new Guy());
-			crowd.addGuy(new GlassEye(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
+				crowd.addGuy(new Guy());
+				crowd.addGuy(new Guy());
+				crowd.addGuy(new Guy());
+				crowd.addGuy(new GlassEye(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 			} catch (TooBigOfACrowdException e) {
 				System.out.println(e.getMessage());
 			}

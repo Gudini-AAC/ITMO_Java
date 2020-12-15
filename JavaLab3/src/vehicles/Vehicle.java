@@ -31,6 +31,17 @@ public abstract class Vehicle extends Object3D implements Simulatable {
 	public abstract boolean isFollowingPath();
 
 	/**
+	* @brief Checks everybodys opinion and gives a common opinion
+	* @return Common opinion
+	*/
+	public abstract String passengerOpinions();
+
+	/**
+	*
+	*/
+	public abstract String vehicleStats();
+
+	/**
 	* @brief Sets a path to follow
 	* @param path Patn to follow
 	*/

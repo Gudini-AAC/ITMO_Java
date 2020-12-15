@@ -9,6 +9,10 @@ public class Work {
 	private class Task {
 		private float complexity;
 
+		/**
+		* @brief Does the task
+		* @return Complexity of the task
+		*/
 		public float doTask() {
 			return complexity;
 		}

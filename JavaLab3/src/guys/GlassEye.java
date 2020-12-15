@@ -23,7 +23,6 @@ public class GlassEye extends Guy implements Named {
 		}
 	}
 
-	private Telescope telescope;
 
 	@Override
 	public String getName() {
@@ -38,8 +37,8 @@ public class GlassEye extends Guy implements Named {
 	}
 
 	/**
-	* @brief The only thing that he's able to do
-	* @return Exactly what you're expecting - messed up work
+	* @brief  Looks lookt hroughhis telescope on to the object
+	* @return What he sees
 	*/
 	public final String lookThroughTelescope(Object3D object) {
 		float len = this.lookAt(object).length();
@@ -65,5 +64,6 @@ public class GlassEye extends Guy implements Named {
 		this.telescope   = new Telescope();
 	}
 
+	private Telescope telescope;
 }
 
