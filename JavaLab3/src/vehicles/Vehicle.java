@@ -7,7 +7,7 @@ import paths.Path;
 import java.util.Optional;
 
 /**
-* @brief 3 dimentional simulateble object that rapresents a vehicle
+* @brief 3 dimentional simulateble object that represents a vehicle
 */
 public abstract class Vehicle extends Object3D implements Simulatable {
 
@@ -37,7 +37,8 @@ public abstract class Vehicle extends Object3D implements Simulatable {
 	public abstract String passengerOpinions();
 
 	/**
-	*
+	* @brief Checks vehicle stats
+	* @return Vehicle stats
 	*/
 	public abstract String vehicleStats();
 

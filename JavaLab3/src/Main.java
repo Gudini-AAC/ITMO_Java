@@ -6,6 +6,7 @@ import guys.Dunno;
 import guys.Doono;
 import guys.RolyPoly;
 import guys.GlassEye;
+import guys.Scatterbrain;
 import guys.Guy;
 import guys.Crowd;
 import guys.TooBigOfACrowdException;
@@ -47,8 +48,9 @@ public class Main {
 			Vehicle balloon = new Balloon(new StatePair(new Vec3(), new Vec3(-1, 0, 1000)), new StatePair());
 			balloon.followPath(path);
 			boolean allAreSitting = true;
-			allAreSitting |= balloon.trySit(new Guy());
-			allAreSitting |= balloon.trySit(new Guy());
+			allAreSitting |= balloon.trySit(new Guy("Tinkle"));
+			allAreSitting |= balloon.trySit(new Guy("PeeWee"));
+			allAreSitting |= balloon.trySit(new Guy("Daisy"));
 			System.out.print(allAreSitting ? "All of the guys are in the balloon\n" : "Guys are out of the balloon\n");
 			world.addWorldObject(balloon);
 		}
@@ -71,7 +73,7 @@ public class Main {
 		world.addWorldObject(new Dunno(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Doono(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new RolyPoly(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
-		world.addWorldObject(new Guy());
+		world.addWorldObject(new Scatterbrain(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Guy());
 		world.addWorldObject(new Guy());
 		world.run(15.f, 0.2f);

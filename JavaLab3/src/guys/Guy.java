@@ -68,8 +68,12 @@ public class Guy extends Object3D implements Directed, Simulatable {
 
 	@Override
 	public String toString() {
+		if (name != null)
+			return name;
+
 		if (Math.random() < .5)
 			return "Regular one";
+
 		return "Nobody";
 	}
 
@@ -82,6 +86,15 @@ public class Guy extends Object3D implements Directed, Simulatable {
 		orientation  = StatePair.makeRandom(-3.14f, 3.14f);
 	}
 
+	/**
+	* @brief Mostly not interesting, but named guy that looks at south and has random position and orientation
+	*/
+	public Guy(String name) {
+		this();
+		this.name = name;
+	}
+
+	private String name = null;
 	protected Vec3 eyeDirection;
 }
 

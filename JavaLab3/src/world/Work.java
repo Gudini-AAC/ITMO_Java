@@ -67,7 +67,9 @@ public class Work {
 		"Bag dropping",
 		"Direction determination",
 		"Programming",
-		"Taking away things"
+		"Taking away things",
+		"Kettle removing",
+		"Tube strapiping"
 	};
 
 	private ArrayList<Task> tasks;

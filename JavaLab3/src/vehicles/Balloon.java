@@ -1,5 +1,6 @@
 package vehicles;
 import vehicles.FlyingVehicle;
+import vehicles.NoBagsToDropException;
 import paths.Path;
 import world.Named;
 import guys.Guy;
@@ -28,7 +29,9 @@ public class Balloon extends FlyingVehicle implements Named {
 
 			position.setValue(newPosition);
 		} else { //Just integrate the position
-			position.setValue(Vec3.mul(Vec3.sub(position.getDerivative(), windSpeed), dt));
+			Vec3 speedVector = Vec3.sub(position.getDerivative(), windSpeed);
+			speedVector.setZ(speedVector.getZ() - mass);
+			position.setValue(Vec3.mul(speedVector, dt));
 		}
 
 		orientation.integrate(dt);
@@ -50,6 +53,7 @@ public class Balloon extends FlyingVehicle implements Named {
 			return false;
 
 		guys[guysCount++] = guy;
+		mass += 1.f;
 
 		return true;
 	}
@@ -59,6 +63,7 @@ public class Balloon extends FlyingVehicle implements Named {
 		if (guysCount == 0)
 			return Optional.empty();
 		
+		mass -= 1.f;
 		return Optional.of(guys[--guysCount]);
 	}
 
@@ -143,6 +148,18 @@ public class Balloon extends FlyingVehicle implements Named {
 	}
 
 	/**
+	* @brief Drops one of a bags to reduce mass of the aircraft
+	* @return Remaining mass
+	* @throws NoBagsToDropException if there is no more bags to drop :-/
+	*/
+	public float dropBag() {
+		if (mass > 1.f)
+			return mass -= 1.f;
+
+		throw new NoBagsToDropException();
+	}
+
+	/**
 	* @brief Creates Balloon with a certan position and orientation
 	* @param position
 	* @param orientation
@@ -152,6 +169,7 @@ public class Balloon extends FlyingVehicle implements Named {
 		this.orientation = new StatePair(orientation);
 						 
 		this.windSpeed   = new Vec3();
+		this.mass        = 100.f;
 		this.guys        = new Guy[MAX_GUYS];
 		this.guysCount   = 0;
 		this.flameColor  = Color.ORANGE;
@@ -163,6 +181,7 @@ public class Balloon extends FlyingVehicle implements Named {
 	private float totalPathTime;
 
 	private Vec3 windSpeed;
+	private float mass;
 	private Color flameColor;
 	private static final int MAX_GUYS = 12;
 }
