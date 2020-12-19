@@ -51,7 +51,11 @@ public class Main {
 			boolean allAreSitting = true;
 			allAreSitting |= balloon.trySit(new Guy("Tinkle"));
 			allAreSitting |= balloon.trySit(new Guy("PeeWee"));
+			allAreSitting |= balloon.trySit(new Guy("Swifty"));
 			allAreSitting |= balloon.trySit(new Guy("Daisy"));
+			allAreSitting |= balloon.trySit(new Guy("TreaclySweeter"));
+			allAreSitting |= balloon.trySit(new Guy("Nebos'ka"));
+			allAreSitting |= balloon.trySit(new Guy("Avos'ka"));
 			System.out.print(allAreSitting ? "All of the guys are in the balloon\n" : "Guys are out of the balloon\n");
 			world.addWorldObject(balloon);
 		}
@@ -76,7 +80,7 @@ public class Main {
 		world.addWorldObject(new RolyPoly(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Scatterbrain(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Posey(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
-		world.addWorldObject(new Guy());
+		world.addWorldObject(new Guy("Topick"));
 		world.run(15.f, 0.2f);
 
 	}

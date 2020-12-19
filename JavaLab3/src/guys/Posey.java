@@ -23,8 +23,26 @@ public class Posey extends Guy implements Named {
 		return "Listen! I've made a new poem";
 	}
 
+	private static class Quatrain {
+		Quatrain(String name) {
+			body = "\n";
+			for (int i = 0; i < 4; i++) {
+				String formatString = dictionary[(int)(Math.random() * dictionary.length) %dictionary.length];
+				body += "\t" + String.format(formatString, name);
+				if (i < 3) body += '\n';
+			}
+		}
+
+		String getBody() {
+			return body;
+		}
+
+		private String body;
+	}
+
 	/**
 	* @brief Makes poetry about an object
+	* @param Object to write poem about
 	* @return Couple of quatrains
 	*/
 	public final String makePoetryAbout(Object3D object) { 
@@ -35,28 +53,10 @@ public class Posey extends Guy implements Named {
 			name = object.toString();
 		}
 
-		class Quatrain {
-
-			Quatrain() {
-				body = "\n";
-				for (int i = 0; i < 4; i++) {
-					String formatString = dictionary[(int)(Math.random() * dictionary.length) % dictionary.length];
-					body += "\t" + String.format(formatString, name);
-					if (i < 3) body += '\n';
-				}
-			}
-
-			String getBody() {
-				return body;
-			}
-
-			private String body;
-		}
-
 		String ret = "";
 		int poemSize = (int)(Math.random() * 3);
 		for (int i = 0; i < poemSize; i++) {
-			Quatrain quatrain = new Quatrain();
+			Quatrain quatrain = new Quatrain(name);
 			ret += quatrain.getBody();
 			if (i < poemSize - 1) ret += '\n';
 		}

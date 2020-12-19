@@ -169,7 +169,7 @@ public class Balloon extends FlyingVehicle implements Named {
 		this.orientation = new StatePair(orientation);
 						 
 		this.windSpeed   = new Vec3();
-		this.mass        = 100.f;
+		this.mass        = 10.f;
 		this.guys        = new Guy[MAX_GUYS];
 		this.guysCount   = 0;
 		this.flameColor  = Color.ORANGE;

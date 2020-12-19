@@ -1,81 +1,149 @@
+All of the guys are in the balloon                                                                        
+All of the guys are in the balloon                                                                        
+Balloon is now at position X: 9.400 Y: 1.133 Z: 8800.001                                                  
+Balloon is now affected by a 1.850 m/s wind                                                               
+Balloon stats: Everything is ok                                                                           
+Passangers in the Balloon think:                                                                          
+        "Tinkle thinks: "It's kinda cold out there"                                                       
+        PeeWee thinks: "It's kinda cold out there"                                                        
+        Daisy thinks that "Life is not that bad""                                                         
+Posey is pointing at East                                                                                 
+Nobody in now looking at Fancy flying machine                                                             
+Grunt makes *Grumbling sounds*                                                                            
+Balloon now has Green flame color                                                                         
+Posey is pointing at East                                                                                 
+Balloon is now affected by a 2.118 m/s wind                                                               
+Dunno in now looking at Fancy flying machine                                                              
+Doono in now looking at Guy that know a lot of stuff                                                      
+Bag has been dropped from Balloon, residual mass is 101.000                                               
+Balloon is following path and now at position X: 3.400 Y: 2.467 Z: 6800.009                               
+Bag has been dropped from Balloon, residual mass is 100.000                                               
+Balloon now has Grey flame color                                                                          
+Posey is here, and he thinks: "Listen! I've made a new poem"                                              
+Doono has a direction X: 0.000 Y: 0.000 Z: 3.800                                                          
+RolyPoly has a direction X: 0.000 Y: 0.000 Z: 3.800                                                       
+RolyPoly thinks about his life: "Everything is ok"                                                        
+Balloon is following path and now at position X: 0.000 Y: 0.000 Z: 998.000                                
+Balloon is following path and now at position X: 0.000 Y: 0.000 Z: 998.000                                
+Posey in now looking at Fancy flying machine                                                              
+Regular one thinks about his life: "Everything is ok"                                                     
+Regular one is pointing at West                                                                           
+Dunno in now looking at Guy likes flowers                                                                 
+Regular one thinks about his life: "Everything is ok"                                                     
+Balloon is now affected by a 2.032 m/s wind                                                               
+Dunno has a direction X: 0.000 Y: 0.000 Z: 7.400                                                          
+Balloon is following path and now at position X: 0.000 Y: 0.000 Z: 998.000                                
+Posey made a poem about Guy that had things: ""                                                           
+Balloon stats: Everything is ok                                                                           
+RolyPoly in now looking at Guy that doesn't know anything                                                 
+RolyPoly have eated his Niceberry. 2 to eat                                                               
+Posey is pointing at East                                                                                 
+Doono in now looking at Guy that had things                                                               
+Scatterbrain is pointing at East                                                                          
+Passangers in the Balloon think:                                                                          
+        "Dunno thinks: "It's kinda cold out there"                                                        
+        RolyPoly thinks: "It's kinda cold out there""                                                     
+Balloon stats: Water starts condencing on the surfaces                                                    
+Grunt is here, and he thinks: "It's a disaster!"                                                          
+Dunno in now looking at Crowd of 4 guys                                                                   
+RolyPoly in now looking at Fancy flying machine                                                           
+Dunno thinks about his life: "Everything is ok"                                                           
+Doono is here, and he thinks: "Boy, you're doing it wrong!"                                               
+RolyPoly in now looking at Guy that had things                                                            
+Dunno in now looking at Guy that eats a lot of stuff                                                      
+Scatterbrain checked his things: "Looks like Hat is lost, chance was 0.152470"                            
+Balloon stats: Water starts condencing on the surfaces                                                    
+Grunt is here, and he thinks: "Life will never be the same as it used to be"                              
+Balloon now has Magenta flame color                                                                       
+Grunt has a direction X: 0.000 Y: 0.000 Z: 13.000                                                         
+Grunt in now looking at Guy that doesn't know anything                                                    
+Posey made a poem about Guy that doesn't know anything: "                                                 
+        Dunno is a thing of beauty                                                                        
+        Dunno is a best thing                                                                             
+        And a joy forever                                                                                 
+        And a joy forever"                                                                                
+Passangers in the Balloon think:                                                                          
+        "Tinkle thinks: "Everything is ok"                                                                
+        Daisy thinks: "Everything is ok""                                                                 
+Regular one is here, and he thinks: "Life is not that bad"                                                
+Slightly complex Kettle removing successfully messed up by Dunno                                          
+Balloon is now at position X: -0.200 Y: 0.000 Z: 179.400                                                  
+Balloon is now at position X: 0.000 Y: 2.000 Z: 1010.000                                                  
+Doono is here, and he thinks: "Boy, you're doing it wrong!"                                               
+Balloon now has Blue flame color                                                                          
+Nobody in now looking at Cool guy with panama by the name of Grunt
+
+
+*********************************************************************************************
+
+
 All of the guys are in the balloon
 All of the guys are in the balloon
-Doono is here, and he thinks: "Do you know what you're doing with your life?"
-Balloon is now affected by a 1.587 m/s wind
-Grunt thinks about his life: "Everything is ok"
-RolyPoly is here, and he thinks: "That stuff is super tasty"
-Regular one in now looking at Guy that doesn't know anything
-Nobody is here, and he thinks: "Life is not that bad"
-Moderatly complex Bag dropping successfully messed up by Dunno
-Dunno has a direction X: 0.000 Y: 0.000 Z: 2.400
-Balloon is now at position X: 1.000 Y: 3.000 Z: 6000.012
-Balloon is now affected by a 0.522 m/s wind
-Regular one thinks about his life: "Everything is ok"
-Nobody is pointing at North west
-Nobody is pointing at North west
-Doono gives a speech:
-        "If you think you are real.
-        I'm already doing bulk of the work.
-        Secondly, everybody is wrong!
-        Secondly, everybody is wrong!"
-Crowd of 4 guys shouted: "Amma just a usual guy"
-RolyPoly have eated his Strawberry. 1 to eat
-Balloon is now affected by a 2.305 m/s wind
-Passangers in the Balloon think:
-        "Regular one thinks that "It's kinda cold out there"
-        Regular one thinks that "It's kinda cold out there""
-Balloon now has Black flame color
-Crowd of 4 guys shouted: "Amma just a usual guy"
-Dunno thinks about his life: "Everything is ok"
-Balloon is following path and now at position X: 1.000 Y: 3.000 Z: 3000.012
-Nobody has a direction X: -16.603 Y: 6.974 Z: -10.854
-RolyPoly in now looking at Fancy flying machine
-Passangers in the Balloon think:
-        "Dunno thinks that "I'm the smartest guy in the simulation! (Not really)"
-        RolyPoly thinks that "Everything is ok""
-RolyPoly have eated his Strawberry. 0 to eat
+Topick thinks about his life: "Everything looks beautiful!"
+Bag has been dropped from Balloon, residual mass is 16.000
+Topick is here, and he thinks: "Life is not that bad"
+Dunno has a direction X: 0.000 Y: 0.000 Z: 0.600
 Crowd of 4 guys shouted: "Life is not that bad"
-Nobody is pointing at West
-Doono gives a speech:
-        "First of all, don't do it.
-        First of all, don't do it.
-        First of all, don't do it."
-Nobody thinks about his life: "Everything is ok"
-Dunno in now looking at Regular one
-Doono is here, and he thinks: "Boy, you're doing it wrong!"
-Nobody in now looking at Crowd of 4 guys
-Balloon is now affected by a 0.996 m/s wind
 Passangers in the Balloon think:
-        "Regular one thinks that "Everything is ok"
-        Nobody thinks that "Everything is ok""
-Dunno in now looking at Fancy flying machine
-Dunno has a direction X: 0.000 Y: 0.000 Z: 9.400
-Nobody is pointing at West
-Balloon now has Lime flame color
+        "Dunno thinks: "Cant's see anything because of clouds"
+        RolyPoly thinks that "Do you want some tasty meals?""
+Balloon now has Light blue flame color
 Grunt makes *Grumbling sounds*
-Regular one in now looking at Fancy flying machine
-Balloon is following path and now at position X: 0.000 Y: 2.000 Z: 1010.000
+RolyPoly is here, and he thinks: "Do you want some tasty meals?"
+Balloon is now at position X: 0.000 Y: 0.000 Z: 998.000
+Balloon stats: Everything is ok
+Topick is here, and he thinks: "Amma just a usual guy"
+Bag has been dropped from Balloon, residual mass is 15.000
+Dunno is pointing at East
+Slightly complex Tube strapiping successfully messed up by Dunno
+Doono in now looking at Cool guy with panama by the name of Grunt
+Posey has a direction X: 0.000 Y: 0.000 Z: 3.000
+Topick thinks about his life: "Everything looks beautiful!"
+Posey made a poem about Guy that had things: ""
+RolyPoly in now looking at Guy that know a lot of stuff
+Doono in now looking at Guy that know a lot of stuff
+Balloon is now affected by a 1.951 m/s wind
+RolyPoly thinks about his life: "Everything looks beautiful!"
+Balloon is now at position X: 0.000 Y: 0.000 Z: 998.000
+Doono is here, and he thinks: "Boy, you're doing it wrong!"
+RolyPoly thinks about his life: "Everything looks beautiful!"
+Topick in now looking at Cool guy with panama by the name of Grunt
+Balloon is now affected by a 1.967 m/s wind
 Guy that eats a lot of stuff been kicked out of Balloon
-Balloon stats: Everything is ok
-Regular one been kicked out of Balloon
-Balloon stats: Everything is ok
-Regular one thinks about his life: "Everything is ok"
-Grunt in now looking at Guy that doesn't know anything
-Doono in now looking at Nobody
-Passangers in the Balloon think:
-        "Regular one thinks that "Everything is ok""
-Dunno in now looking at Guy that know a lot of stuff
-Crowd of 4 guys shouted: "Life is not that bad"
-Doono is pointing at East
-Regular one in now looking at Fancy flying machine
-RolyPoly has a direction X: 0.000 Y: 0.000 Z: 12.800
+Doono is here, and he thinks: "Boy, you're doing it wrong!"
+Topick is pointing at West
+Slightly complex Kettle removing is done exceptionally well by Doono
 RolyPoly is here, and he thinks: "That stuff is super tasty"
-Balloon is now affected by a 2.058 m/s wind
-Balloon now has Green flame color
+RolyPoly in now looking at Guy that eats a lot of stuff
+Scatterbrain is here, and he thinks: "T thought I have that thing"
+RolyPoly is here, and he thinks: "Do you want some tasty meals?"
+Scatterbrain checked his things: "Nothing is lost, Imma lucky"
+Balloon is now at position X: -0.335 Y: 0.343 Z: 197.128
 Balloon is now at position X: 0.000 Y: 2.000 Z: 1010.000
-Doono in now looking at Guy that doesn't know anything
-Doono thinks about his life: "Everything is ok"
+Dunno in now looking at Fancy flying machine
+Moderatly complex Kettle removing is done exceptionally well by Doono
+RolyPoly has a direction X: 0.000 Y: 0.000 Z: 10.800
+Topick in now looking at Guy likes flowers
+Moderatly complex Kettle removing successfully messed up by Dunno
+Doono in now looking at Guy that eats a lot of stuff
 RolyPoly is pointing at East
+Doono in now looking at Guy that eats a lot of stuff
+Topick has a direction X: -30.670 Y: -1.347 Z: -20.739
+Posey made a poem about Fancy flying machine: "
+        Balloon is a thing of beauty
+        And a joy forever
+        Balloon is a thing of beauty
+        Balloon is a cool guy"
+Grunt has a direction X: 0.000 Y: 0.000 Z: 12.600
+Bag has been dropped from Balloon, residual mass is 10.000
 Balloon stats: Everything is ok
-Balloon stats: Water starts condencing on the surfaces
-Nobody has a direction X: 15.685 Y: 5.802 Z: -37.685
+Posey in now looking at Guy that had things
+Dunno in now looking at Guy that doesn't know anything
+Balloon stats: Everything is ok
+Bag has been dropped from Balloon, residual mass is 14.000
+Topick thinks about his life: "Everything looks beautiful!"
+Avos'ka been kicked out of Balloon
+Doono thinks about his life: "Everything looks beautiful!"
+Guy that doesn't know anything been kicked out of Balloon
+Nebos'ka been kicked out of Balloon
+Grunt is here, and he thinks: "It's a disaster!"

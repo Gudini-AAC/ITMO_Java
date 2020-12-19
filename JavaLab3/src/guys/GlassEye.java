@@ -37,7 +37,8 @@ public class GlassEye extends Guy implements Named {
 	}
 
 	/**
-	* @brief  Looks lookt hroughhis telescope on to the object
+	* @brief  Looks look through his telescope on to the object
+	* @param Object to look at
 	* @return What he sees
 	*/
 	public final String lookThroughTelescope(Object3D object) {

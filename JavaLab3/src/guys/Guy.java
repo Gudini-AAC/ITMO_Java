@@ -21,6 +21,10 @@ public class Guy extends Object3D implements Directed, Simulatable {
 		return "Life is not that bad";
 	}
 
+	/**
+	* @brief Position related life stats
+	* @return Life stats
+	*/
 	public String lifeStats() {
 		float height = position.getValue().getZ();
 
@@ -30,8 +34,10 @@ public class Guy extends Object3D implements Directed, Simulatable {
 			return "It's dead cold out there, my pants are full of ice";
 		else if (height > 1e3)
 			return "It's kinda cold out there";
+		else if (height > 5e2)
+			return "Cant's see anything because of clouds";
 
-		return "Everything is ok";
+		return "Everything looks beautiful!";
 	}
 
 	/**

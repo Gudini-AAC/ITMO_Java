@@ -134,7 +134,7 @@ public class World {
 					((FlyingVehicle)object).setWind(windSpeed);
 				}
 
-				if (object instanceof FlyingVehicle && Math.random() < threshold) {
+				if (object instanceof Vehicle && Math.random() < threshold) {
 					System.out.printf("%s stats: %s\n", name, ((Vehicle)object).vehicleStats());
 				}
 

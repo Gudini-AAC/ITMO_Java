@@ -27,12 +27,12 @@ public class Scatterbrain extends Guy implements Named {
         public Belongings() {
             final String[] names = {
                 "Hat",
-                "Pet",
                 "Rat",
-                "Bat",
                 "Cat",
-                "Fat",
                 "Gat",
+                "Fat",
+                "Bat",
+                "Pet",
                 "Oat"
             };
 
@@ -40,17 +40,20 @@ public class Scatterbrain extends Guy implements Named {
             chanceToDrop = (float)Math.random();
         }
 
+        /**
+        * @brief Retrieve chane of dropping
+        * @return Chance of dropping
+        */
         public float getChanceToDrop() {
             return chanceToDrop;
         }
 
+        /**
+        * @brief Retrieve name
+        * @return Name
+        */
         public String getName() {
             return name;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            return other instanceof Belongings && chanceToDrop == ((Belongings)other).chanceToDrop && name.equals(((Belongings)other).name);
         }
 
         private String name;
