@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.lang.Math;
 import java.lang.RuntimeException;
+import vehicles.NoBagsToDropException;
 import world.Simulatable;
 import world.Object3D;
 import common.Color;
@@ -11,6 +12,8 @@ import guys.Guy;
 import guys.Crowd;
 import guys.Grunt;
 import guys.RolyPoly;
+import guys.Posey;
+import guys.Scatterbrain;
 import guys.Dunno;
 import guys.Doono;
 import guys.GlassEye;
@@ -181,6 +184,32 @@ public class World {
 						System.out.printf("%s coludn't eat his meal, because %s\n", name, e.getMessage());
 					}
 				}
+
+				if (object instanceof Scatterbrain && Math.random() < threshold) {
+					System.out.printf("%s checked his things: \"%s\"\n", name, ((Scatterbrain)object).checkBelongings());
+				}
+
+				if (object instanceof Posey && Math.random() < threshold) {
+					int index = (int)(Math.random() * simulatableObjects.size()) % simulatableObjects.size();
+
+					if (simulatableObjects.get(index) instanceof Object3D) {
+						Object3D target = (Object3D)simulatableObjects.get(index);
+
+						System.out.printf("%s made a poem about %s: \"%s\"\n", name,
+							target.toString(), ((Posey)object).makePoetryAbout(target));
+					}
+				}
+
+				if (object instanceof Balloon && Math.random() < threshold) {
+					float residualMass;
+					try {
+						residualMass = ((Balloon)object).dropBag();
+						System.out.printf("Bag has been dropped from %s, residual mass is %.3f\n", name, residualMass);
+					} catch (NoBagsToDropException e) {
+						System.out.printf("No bags are dropped from %s: %s\n", name, e.getMessage());
+					}
+				}
+
 
 			}
 

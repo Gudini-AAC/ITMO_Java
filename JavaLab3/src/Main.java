@@ -7,6 +7,7 @@ import guys.Doono;
 import guys.RolyPoly;
 import guys.GlassEye;
 import guys.Scatterbrain;
+import guys.Posey;
 import guys.Guy;
 import guys.Crowd;
 import guys.TooBigOfACrowdException;
@@ -74,7 +75,7 @@ public class Main {
 		world.addWorldObject(new Doono(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new RolyPoly(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Scatterbrain(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
-		world.addWorldObject(new Guy());
+		world.addWorldObject(new Posey(new StatePair(), new StatePair(new Vec3(), new Vec3(0, 0, 1))));
 		world.addWorldObject(new Guy());
 		world.run(15.f, 0.2f);
 

@@ -82,9 +82,12 @@ public class Scatterbrain extends Guy implements Named {
         if (belongings.isEmpty())
             return "Nothing is lost, because there is nothing to loose";
 
-        if (Math.random() < .5) {
-            int lastIndex = belongings.size() - 1;
-            String ret = "Looks like " + belongings.get(lastIndex).getName() + " is lost";
+        int lastIndex = belongings.size() - 1;
+        float looseChance = belongings.get(lastIndex).getChanceToDrop();
+        if (Math.random() < looseChance) {
+            String ret = String.format("Looks like %s is lost, chance was %f", 
+                belongings.get(lastIndex).getName(), looseChance);
+
             belongings.remove(lastIndex);
             return ret;
         }

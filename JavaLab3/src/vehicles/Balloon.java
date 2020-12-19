@@ -119,7 +119,7 @@ public class Balloon extends FlyingVehicle implements Named {
 
 			if (Math.random() < .7) {
 				if (!ret.isEmpty()) ret += "\n\t";
-				ret += name + " thinks that \"" + guy.lifeStats() + "\"";
+				ret += name + " thinks: \"" + guy.lifeStats() + "\"";
 			} else if (Math.random() < .7) {
 				if (!ret.isEmpty()) ret += "\n\t";
 				ret += name + " thinks that \"" + guy.describeSituation() + "\"";
