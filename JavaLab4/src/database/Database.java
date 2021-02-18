@@ -10,13 +10,40 @@ import java.time.LocalDate;
 import java.io.*;
 import structures.Person;
 
+/**
+* @brief This class holds datastructure and the metadata for the database.
+*/
 public class Database {
+	/**
+	* @brief Constructs database with associated database file.
+	* @param filepath Path to a database file.
+	*/
 	public Database(String filepath) { this.filepath = filepath; stack = new Stack(); date = LocalDate.now(); }
+	
+	/**
+	* @return Size of the underlying datastructure.
+	*/
 	public int size() { return stack.size(); }
+	
+	/**
+	* @return Date when underlying datastructure was constructed.
+	*/
 	public LocalDate constructionDate() { return date; }
+	
+	/**
+	* @brief Clear the underlying datastructure.
+	*/
 	public void clear() { stack.clear(); }
+	
+	/**
+	* @brief Shuffle the elements in the underlying datastructure.
+	*/
 	public void shuffle() { Collections.shuffle(stack); }
 	
+	/**
+	* @brief Add new element to the database.
+	* @param val Element to add.
+	*/
 	public void add(Person val) { 
 		long maxId = 0;
 		for (Person person : stack)
@@ -25,18 +52,34 @@ public class Database {
 		stack.push(val);
 	}
 	
+	/**
+	* @brief Find the first element that passes the test.
+	* @param test Test function.
+	* @return Either index of the element or -1.
+	*/
 	public int findFirstOf(Predicate<Person> test) {
 		for (int i = 0; i < stack.size(); i++)
 			if (test.test(stack.get(i))) return i;
 		return -1;
 	}
 	
+	/**
+	* @brief Replace element at index with a given.
+	* @param index Index at wich new element should be placed.
+	* @param person New element to insert.
+	* @return Success bool.
+	*/
 	public boolean replace(int index, Person person) {
 		if (index >= stack.size()) return false;
 		stack.set(index, person);
 		return true;
 	}
 	
+	/**
+	* @brief Retrieve all of the elements that are passing the test.
+	* @param test Test function.
+	* @return List of passed elements.
+	*/
 	public List<Person> retrieveIf(Predicate<Person> test) {
 		List<Person> ret = new ArrayList();
 		for (Person person : stack)
@@ -44,6 +87,10 @@ public class Database {
 		return ret;
 	}
 	
+	/**
+	* @brief Remove all of the elements that pass the test.
+	* @param test Test function.
+	*/
 	public void removeIf(Predicate<Person> test) {
 		for (int i = 0; i < stack.size();) {
 			if (test.test(stack.get(i))) {
@@ -54,9 +101,13 @@ public class Database {
 		}
 	}
 	
-	public List<Person> sortedBy(Comparator<Person> test) {
+	/**
+	* @brief Retrieve all of the elements in the sorted order.
+	* @param compare Comparison function
+	*/
+	public List<Person> sortedBy(Comparator<Person> compare) {
 		List<Person> ret = (Stack<Person>)stack.clone();
-		Collections.sort(ret, test);
+		Collections.sort(ret, compare);
 		return ret;
 	}
 	
@@ -68,69 +119,49 @@ public class Database {
 		return ret;
 	}
 	
-	public boolean save(BufferedWriter writer) throws IOException {
+	/**
+	* @brief Save database into the associated file
+	*/
+	public void save() throws IOException, FileNotFoundException {
 		File file = new File(filepath);
 		FileOutputStream fileOStream;
 		
-		try {
-			fileOStream = new FileOutputStream(file);
-		} catch (FileNotFoundException e) {
-			writer.write("File not found\n");
-			writer.flush();
-			return false;
-		}
-
+		fileOStream = new FileOutputStream(file);
 		OutputStreamWriter fileWriter = new OutputStreamWriter(fileOStream);
+		
+		fileWriter.write(date.toString() + "\n");
 		
 		for (Person person : stack)
 			fileWriter.write(person.toCSV() + "\n");
 
 		fileWriter.flush();
 		fileOStream.close();
-		
-		return true;
 	}
 	
-	public boolean load(BufferedWriter writer) throws IOException {
+	/**
+	* @brief Load database from the associated file
+	*/
+	public void load() throws IOException, FileNotFoundException {
 		File file = new File(filepath);
 		FileInputStream fileIStream;
 
-		try {
-			fileIStream = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			writer.write("File not found\n");
-			writer.flush();
-			return false;
-		}
-		
+		fileIStream = new FileInputStream(file);
 		BufferedReader fileReader = new BufferedReader(new InputStreamReader(fileIStream));
 		
-		try {
-			String str = fileReader.readLine();
-			if (str == null) return false;
+		String str = fileReader.readLine();
+		if (str != null) {
 			date = LocalDate.parse(str);
-		} catch (IOException e) {
-			writer.write(e.toString());
-			return false;
-		}
 		
-		for (;;) {
-			try {
-				String str = fileReader.readLine();
+			for (;;) {
+				str = fileReader.readLine();
 				if (str == null) break;
 				Person person = new Person();
 				person.fromCSV(str, 0);
 				stack.push(person);
-			} catch (IOException e) {
-				writer.write(e.toString());
-				break;
-			} 
+			}
 		}
 		
-		writer.flush();
 		fileIStream.close();
-		
-		return true;
 	}
 	
 	private Stack<Person> stack;

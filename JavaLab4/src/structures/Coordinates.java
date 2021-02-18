@@ -1,12 +1,14 @@
 package structures;
 
 import structures.WrongStructureFormatException;
+import structures.CSV;
+import structures.CSVSerializable;
 import java.lang.Integer;
 import java.lang.Float;
 import java.lang.NumberFormatException;
 import java.io.*;
 
-public class Coordinates {
+public class Coordinates implements CSVSerializable {
     /* private */ public int x;
     /* private */ public float y;
     
@@ -20,6 +22,7 @@ public class Coordinates {
     	return ret + "\n}\n";
     }
     
+    @Override
     public String toCSV() {
         String ret = "";
 
@@ -29,6 +32,7 @@ public class Coordinates {
         return ret;
     }
     
+    @Override
     public int fromCSV(String str, int offset) {
         String val;
         
@@ -43,7 +47,15 @@ public class Coordinates {
         return offset;   
     }
     
-    
+    /**
+    * @brief Make coordinates from stream in an interactive manner.
+    * 
+    * @param reader Input stream from the user.
+    * @param writer Output stream to the user.
+    * @return Constructed coordinates.
+    * @throws IOException if either of the streams falis.
+    * @throws WrongStructureFormatException if the user fails to input the coordinates.
+    */
     public static Coordinates fromStream(BufferedReader reader, BufferedWriter writer) throws IOException,
         WrongStructureFormatException {
     	Coordinates ret = new Coordinates();

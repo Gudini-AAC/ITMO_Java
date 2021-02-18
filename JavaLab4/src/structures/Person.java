@@ -5,13 +5,16 @@ import structures.Coordinates;
 import structures.Location;
 import structures.Color;
 import structures.CSV;
+import structures.CSVSerializable;
 import java.time.LocalDate;
 import java.lang.Long;
 import java.lang.Comparable;
 import java.io.*;
 
-public class Person implements Comparable<Person> {
-	// I'm not ready to spend my time on bs getters and setters for absolutly no reason
+public class Person implements Comparable<Person>, CSVSerializable {
+	// I'm not ready to spend my time here and in the other structures
+    // on the bs getters and setters for absolutly no reason.
+
     /* privete */ public long id;
     /* privete */ public String name;
     /* privete */ public Coordinates coordinates;
@@ -51,6 +54,7 @@ public class Person implements Comparable<Person> {
         return ret + "\n}\n";
     }
     
+    @Override
     public String toCSV() {
         String ret = "";
 
@@ -67,6 +71,7 @@ public class Person implements Comparable<Person> {
         return ret;
     }
     
+    @Override
     public int fromCSV(String str, int offset) {
         String val;
         
@@ -111,6 +116,15 @@ public class Person implements Comparable<Person> {
         return offset;
     }
     
+    /**
+    * @brief Make person from stream in an interactive manner.
+    * 
+    * @param reader Input stream from the user.
+    * @param writer Output stream to the user.
+    * @return Constructed person.
+    * @throws IOException if either of the streams falis.
+    * @throws WrongStructureFormatException if the user fails to input a person.
+    */
     public static Person fromStream(BufferedReader reader, BufferedWriter writer) throws IOException,
         WrongStructureFormatException {
         Person ret = new Person();

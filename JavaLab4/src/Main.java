@@ -4,20 +4,24 @@ import java.lang.Exception;
 import commands.CommandRunner;
 
 public class Main {
+	
 	public static void main(String[] args) {
-		if (args.length == 0) { 
-			System.out.println("Database path is not present. Provide one in the first argument.");
+		if (args.length == 0) {
+			System.out.println("The database path is not present. Provide one in the first argument.");
+			return;
 		}
+		
 		Database database = new Database(args[0]);
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		try {
-			database.load(writer);
+			database.load();
+		} catch (FileNotFoundException e) {
+			System.out.println("Database file not found");
 		} catch (Exception e) {
-			e.printStackTrace(System.out);
-			System.out.println(e.toString());
+			System.out.println("Database file is corrupted.");
 		}
 		
 		for (;;) {
@@ -32,6 +36,6 @@ public class Main {
 			} 
 		}
 		
-		
 	}
+	
 }

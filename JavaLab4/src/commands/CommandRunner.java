@@ -12,8 +12,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Arrays;
 
+/**
+* @brief Class that holds a list of all commands and can dispatch between them.
+*/
 public class CommandRunner {
-
+	
+	/**
+	* @brief Execute one of the regestred commands.
+	* @param args trailing strings that are given with the command.
+	* @param database for command to change it.
+	* @param reader for command to interact with the user.
+	* @param writer for command to interact with the user.
+	*/
 	public static void runCommand(String[] args, Database database, BufferedReader reader, BufferedWriter writer) throws CommandException, IOException {
 		Class commandClass = commandMap.get(args[0]);
 		
@@ -31,6 +41,9 @@ public class CommandRunner {
 		writer.flush();
 	}
 	
+	/**
+	* @brief Populate the command map with the data from a command regestry.
+	*/
 	private static Map<String, Class> makeMap() {
 		Map<String, Class> map = new HashMap<String, Class>();
 		
@@ -44,5 +57,8 @@ public class CommandRunner {
 		return map;
 	}
 	
+	/**
+	* @brief commandMap is used to find the command class corresponding to the user input.
+	*/
 	private static Map<String, Class> commandMap = makeMap();
 }

@@ -2,13 +2,14 @@ package structures;
 
 import structures.WrongStructureFormatException;
 import structures.CSV;
+import structures.CSVSerializable;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Double;
 import java.lang.NumberFormatException;
 import java.io.*;
 
-public class Location {
+public class Location implements CSVSerializable {
     /* private */ public Long x;
     /* private */ public double y;
     /* private */ public int z;
@@ -30,6 +31,7 @@ public class Location {
     	return ret + "\n}\n";
     }
     
+    @Override
     public String toCSV() {
         String ret = "";
 
@@ -41,6 +43,7 @@ public class Location {
         return ret;
     }
     
+    @Override
     public int fromCSV(String str, int offset) {
         String val;
         
@@ -67,6 +70,15 @@ public class Location {
         return offset;   
     }
     
+    /**
+    * @brief Make location from stream in an interactive manner
+    * 
+    * @param reader Input stream from the user
+    * @param writer Output stream to the user
+    * @return Constructed location
+    * @throws IOException if either of the streams falis
+    * @throws WrongStructureFormatException if the user fails to input a location
+    */
     public static Location fromStream(BufferedReader reader, BufferedWriter writer) throws IOException,
         WrongStructureFormatException {
     	Location ret = new Location();

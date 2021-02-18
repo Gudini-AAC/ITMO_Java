@@ -13,7 +13,12 @@ public class SaveCommand implements Command {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		
-		database.save(writer);
+		try {
+			database.save();
+		} catch (FileNotFoundException e) {
+			writer.write("Database file not found\n");
+			writer.flush();
+		}
 	}
 	
 	@Override
