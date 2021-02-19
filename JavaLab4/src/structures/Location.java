@@ -16,7 +16,17 @@ public class Location implements CSVSerializable {
     /* private */ public String name;
     
     public boolean equals(Location other) {
-        return x.equals(other.x) && y == other.y && z == other.z && name.equals(other.name);
+        boolean namesMatch;
+        
+        if (name == null && other.name == null)
+            namesMatch = true;
+        else if (name == null || other.name == null)
+            namesMatch = false;
+        else 
+            namesMatch = name.equals(other.name);
+            
+        
+        return namesMatch && x.equals(other.x) && y == other.y && z == other.z;
     }
     
     @Override
