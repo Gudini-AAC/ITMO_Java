@@ -12,7 +12,7 @@ import java.io.*;
 
 public class RemoveLessCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 1) {
 			String message = "Command \"remove_less\" expects one argument - location.z, but ";
 			if (args.length == 0) {
@@ -29,8 +29,7 @@ public class RemoveLessCommand implements Command {
 		try {
 			z = Integer.parseInt(args[0]);
 		} catch (NumberFormatException e) {
-			writer.write("Unable to parse the location.z.\n");
-            writer.flush();
+			context.getIO().writeWarning("Unable to parse the location.z.\n");
             return;
 		}
 		

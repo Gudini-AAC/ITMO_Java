@@ -19,30 +19,34 @@ public class CommandRunner {
 	
 	/**
 	* @brief Execute one of the regestred commands.
-	* @param args trailing strings that are given with the command.
-	* @param database for command to change it.
-	* @param reader for command to interact with the user.
-	* @param writer for command to interact with the user.
+	* @param database For command to change it.
+	* @param args     Trailing strings that are given with the command.
+	* @param context  Context of a running command call stack.
+	* @throws CommandException If command fails.
+	* @throws IOException If one of the user io streams fails.
 	*/
-	public static void runCommand(String[] args, Database database, BufferedReader reader, BufferedWriter writer) throws CommandException, IOException {
+	public static void runCommand(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
+		if (args[0].length() == 0) return;
+		
 		Class commandClass = commandMap.get(args[0]);
 		
 		try {
 			if (commandClass != null) {
 				Command command = (Command)commandClass.newInstance();
-				command.execute(database, reader, writer, Arrays.copyOfRange(args, 1, args.length));
+				command.execute(database, Arrays.copyOfRange(args, 1, args.length), context);
 			} else {
-				writer.write("Unknown command. Use \"help\" to list all commands.\n");
+				String message = String.format(
+					"Unknown command \"%s\". Use \"help\" to list all commands.", args[0]);
+				throw new CommandException(message);
 			}
 		} catch (IllegalAccessException | InstantiationException e) {
-			writer.write("Internal error: corrupted command regestry.\n");
+			throw new Error("Internal error: corrupted command regestry.");
 		}
-		
-		writer.flush();
 	}
 	
 	/**
-	* @brief Populate the command map with the data from a command regestry.
+	* @brief  Populate the command map with the data from a command regestry.
+	* @return Command name to command class map.
 	*/
 	private static Map<String, Class> makeMap() {
 		Map<String, Class> map = new HashMap<String, Class>();

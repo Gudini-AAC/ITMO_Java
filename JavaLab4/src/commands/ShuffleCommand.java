@@ -10,7 +10,7 @@ import java.lang.Class;
 
 public class ShuffleCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		database.shuffle();
@@ -21,5 +21,4 @@ public class ShuffleCommand implements Command {
 
 	@Override
 	public String description() { return "Shuffle the values in the database."; }
-	
 }

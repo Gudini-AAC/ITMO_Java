@@ -11,3 +11,5 @@ ITALY
 100
 none
 
+exit
+execute_script ../assets/script.txt

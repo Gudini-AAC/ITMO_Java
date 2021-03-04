@@ -11,7 +11,7 @@ import java.lang.Long;
 import java.lang.Comparable;
 import java.io.*;
 
-public class Person implements Comparable<Person>, CSVSerializable {
+public class Person implements Comparable<Person>, CSVSerializable, Interactive {
 	// I'm not ready to spend my time here and in the other structures
     // on the bs getters and setters for absolutly no reason.
 
@@ -64,7 +64,7 @@ public class Person implements Comparable<Person>, CSVSerializable {
         ret += "," + CSV.decorate(creationDate.toString());
         ret += "," + CSV.decorate((new Long(height)).toString());
         ret += "," + CSV.decorate(eyeColor.toString());
-        ret += "," + CSV.decorate((hairColor == null ? "null" : hairColor.toString()));
+        ret += "," + CSV.decorate((hairColor == null ? "" : hairColor.toString()));
         ret += "," + CSV.decorate(nationality.toString());
         ret += "," + location.toCSV();
        
@@ -101,7 +101,7 @@ public class Person implements Comparable<Person>, CSVSerializable {
         val = CSV.nextCell(str, offset);
         offset += val.length();
         val = CSV.undecorate(val);
-        if (val.equals("null"))
+        if (val.length() == 0)
             hairColor = null;
         else    
             hairColor = Color.valueOf(val);
@@ -116,130 +116,102 @@ public class Person implements Comparable<Person>, CSVSerializable {
         return offset;
     }
     
-    /**
-    * @brief Make person from stream in an interactive manner.
-    * 
-    * @param reader Input stream from the user.
-    * @param writer Output stream to the user.
-    * @return Constructed person.
-    * @throws IOException if either of the streams falis.
-    * @throws WrongStructureFormatException if the user fails to input a person.
-    */
-    public static Person fromStream(BufferedReader reader, BufferedWriter writer) throws IOException,
-        WrongStructureFormatException {
-        Person ret = new Person();
-        ret.creationDate = LocalDate.now();
+    @Override
+    public void fromStream(InteractionStreams userIO) throws IOException, WrongStructureFormatException {
+        creationDate = LocalDate.now();
         
-        writer.write("Person:\n");
-        writer.flush();
+        userIO.writeRequest("Person:\n");
         
         for (;;) {
-            writer.write("Name: ");
-            writer.flush();
+            userIO.writeRequest("Name: ");
             
-            String str = reader.readLine();
+            String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
             
             if (str.length() > 0) {
-                ret.name = str;
+                name = str;
                 break;
             } else {
-                writer.write("Illigal name string.\n");
-                writer.flush();
+                userIO.writeWarning("Illigal name string.\n");
             }
         }
         
-        ret.coordinates = Coordinates.fromStream(reader, writer);
+        coordinates = new Coordinates();
+        coordinates.fromStream(userIO);
         
         for (;;) {
-            writer.write("Height: ");
-            writer.flush();
+            userIO.writeRequest("Height: ");
             
-            String str = reader.readLine();
+            String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
             
             try {
                 long height = Long.parseLong(str);
                 if (height > 0) {
-                    ret.height = height;
+                    height = height;
                     break;
                 } else {
-                    writer.write("Value is out of range [1, 9223372036854775807].\n");
-                    writer.flush();
+                    userIO.writeWarning("Value is out of range [1, 9223372036854775807].\n");
                 }
             } catch (NumberFormatException e) {
-                writer.write("Unable to parse the value.\n");
-                writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
             }
         }
         
         for (;;) {
-            writer.write("Eye color:\n");
-            for (Color value : Color.values()) {
-                writer.write(value.toString());
-                writer.write("\n");
-            }
-            writer.flush();
+            userIO.writeRequest("Eye color:\n");
+            for (Color value : Color.values())
+                userIO.writeRequest(value.toString() + "\n");
             
-            String str = reader.readLine();
+            String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
             
             try {
-                ret.eyeColor = Color.valueOf(str);
+                eyeColor = Color.valueOf(str);
                 break;
             } catch (IllegalArgumentException e) {
-                writer.write("Unable to parse the value.\n");
-                writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
             }
         }
         
         for (;;) {
-            writer.write("Hair color:\n");
-            for (Color value : Color.values()) {
-                writer.write(value.toString());
-                writer.write("\n");
-            }
-            writer.flush();
+            userIO.writeRequest("Hair color:\n");
+            for (Color value : Color.values())
+                userIO.writeRequest(value.toString() + "\n");
             
-            String str = reader.readLine();
+            String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
             
             if (str.length() == 0) {
-                ret.hairColor = null;            
+                hairColor = null;            
                 break;
             }
             
             try {
-                ret.hairColor = Color.valueOf(str);
+                hairColor = Color.valueOf(str);
                 break;
             } catch (IllegalArgumentException e) {
-                writer.write("Unable to parse the value.\n");
-                writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
             }
         }
         
         for (;;) {
-            writer.write("Nationality:\n");
-            for (Country value : Country.values()) {
-                writer.write(value.toString());
-                writer.write("\n");
-            }
-            writer.flush();
+            userIO.writeRequest("Nationality:\n");
+            for (Country value : Country.values())
+                userIO.writeRequest(value.toString() + "\n");
             
-            String str = reader.readLine();
+            String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
             
             try {
-                ret.nationality = Country.valueOf(str);
+                nationality = Country.valueOf(str);
                 break;
             } catch (IllegalArgumentException e) {
-                writer.write("Unable to parse the value.\n");
-                writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
             }
         }
         
-        ret.location = Location.fromStream(reader, writer);
-        
-        return ret;
+        location = new Location();
+        location.fromStream(userIO);
     }
 }

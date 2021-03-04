@@ -12,7 +12,7 @@ import java.io.*;
 
 public class UpdateCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 1) {
 			String message = "Command \"update\" expects one argument - id, but ";
 			if (args.length == 0) {
@@ -29,25 +29,20 @@ public class UpdateCommand implements Command {
 		try {
 			id = Long.parseLong(args[0]);
 		} catch (NumberFormatException e) {
-			writer.write("Unable to parse the id.\n");
-            writer.flush();
-            return;
+			throw new CommandException("Unable to parse the id.\n");
 		}
 		
 		int index = database.findFirstOf(x -> x.id == id);
-		if (index == -1) {
-			writer.write("Element not found.\n");
-            writer.flush();
-            return;
-		}
+		if (index == -1)
+			throw new CommandException("Element not found.\n");
 		
 		try {
-			Person person = Person.fromStream(reader, writer);
+			Person person = new Person();
+			person.fromStream(context.getIO());
 			person.id = id;
 			database.replace(index, person);
 		} catch (WrongStructureFormatException e) {
-			writer.write(e.toString());
-            writer.flush();
+			throw new CommandException(e.toString());
 		}
 	}
 	
@@ -55,6 +50,6 @@ public class UpdateCommand implements Command {
 	public String keyString() { return "update"; }
 
 	@Override
-	public String description() { return "Update the value in the database."; }
+	public String description() { return "Update value in the database."; }
 	
 }

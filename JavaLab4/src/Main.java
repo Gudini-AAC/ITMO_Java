@@ -2,6 +2,8 @@ import java.io.*;
 import database.Database;
 import java.lang.Exception;
 import commands.CommandRunner;
+import commands.CommandExecutionContext;
+import structures.InteractionStreams;
 
 public class Main {
 	
@@ -24,13 +26,16 @@ public class Main {
 			System.out.println("Database file is corrupted.");
 		}
 		
+		InteractionStreams userIO = new InteractionStreams(reader, writer, writer);
+		CommandExecutionContext context = new CommandExecutionContext(userIO);
+		
 		for (;;) {
 			try {
 				String str = reader.readLine();
 				String[] substrs = str.split(" ");
 				if (substrs.length == 1 && substrs[0].equals("exit")) break;
 				
-				CommandRunner.runCommand(substrs, database, reader, writer);
+				CommandRunner.runCommand(database, substrs, context);
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			} 

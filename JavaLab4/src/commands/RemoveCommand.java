@@ -11,7 +11,7 @@ import java.io.*;
 
 public class RemoveCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 1) {
 			String message = "Command \"remove_by_id\" expects one argument - id, but ";
 			if (args.length == 0) {
@@ -28,8 +28,7 @@ public class RemoveCommand implements Command {
 		try {
 			id = Long.parseLong(args[0]);
 		} catch (NumberFormatException e) {
-			writer.write("Unable to parse the id.\n");
-            writer.flush();
+			context.getIO().writeWarning("Unable to parse the id.\n");
             return;
 		}
 		

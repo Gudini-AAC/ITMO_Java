@@ -9,12 +9,11 @@ import java.lang.Class;
 
 public class InfoCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		
-		writer.write(String.format("Type: Stack<Person>, Size: %d, Date: ", database.size()) + database.constructionDate().toString() + "\n");
-		writer.flush();
+		context.getIO().writeWarning(String.format("Type: Stack<Person>, Size: %d, Date: ", database.size()) + database.constructionDate().toString() + "\n");
 	}
 	
 	@Override

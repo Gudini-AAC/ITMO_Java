@@ -1,5 +1,6 @@
 package commands;
 
+import commands.CommandExecutionContext;
 import commands.CommandException;
 import database.Database;
 import java.io.*;
@@ -13,15 +14,13 @@ public interface Command {
 	/**
 	* @brief Execute the command.
 	*
-	* @param database for command to change it.
-	* @param reader for command to interact with the user.
-	* @param writer for command to interact with the user.
-	* @param args trailing strings that are given with the command.
-	* @throws CommandException if the command fails.
-	* @throws IOException if the read or write streams fail.
+	* @param database For command to change it.
+	* @param args Trailing strings that are given with the command.
+	* @param context Context of a running command call stack.
+	* @throws CommandException If the command fails.
+	* @throws IOException If the read or write streams fail.
 	*/
-	void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args)
-		throws CommandException, IOException;
+	void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException;
 		
 	/**
 	* @return The string that is used to call the command.

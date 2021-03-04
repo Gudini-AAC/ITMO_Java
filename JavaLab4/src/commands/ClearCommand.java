@@ -11,7 +11,7 @@ import java.io.*;
 
 public class ClearCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		

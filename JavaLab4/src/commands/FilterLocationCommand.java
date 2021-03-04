@@ -14,20 +14,19 @@ import java.io.*;
 
 public class FilterLocationCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		
 		try {
-			Location location = Location.fromStream(reader, writer);
+			Location location = new Location();
+			location.fromStream(context.getIO());
 			List<Person> persons = database.retrieveIf(x -> x.location.equals(location));
 			
 			for (Person person : persons)
-				writer.write(person.toString());
-			writer.flush();		
+				context.getIO().writeWarning(person.toString());
 		} catch (WrongStructureFormatException e) {
-			writer.write(e.toString());
-            writer.flush();
+			context.getIO().writeWarning(e.toString());
 		}
 	}
 	

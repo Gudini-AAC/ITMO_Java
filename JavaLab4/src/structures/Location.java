@@ -3,13 +3,14 @@ package structures;
 import structures.WrongStructureFormatException;
 import structures.CSV;
 import structures.CSVSerializable;
+import structures.Interactive;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Double;
 import java.lang.NumberFormatException;
 import java.io.*;
 
-public class Location implements CSVSerializable {
+public class Location implements CSVSerializable, Interactive {
     /* private */ public Long x;
     /* private */ public double y;
     /* private */ public int z;
@@ -26,7 +27,7 @@ public class Location implements CSVSerializable {
             namesMatch = name.equals(other.name);
             
         
-        return namesMatch && x.equals(other.x) && y == other.y && z == other.z;
+        return namesMatch;// && x.equals(other.x) && y == other.y && z == other.z;
     }
     
     @Override
@@ -48,7 +49,7 @@ public class Location implements CSVSerializable {
         ret += CSV.decorate(x.toString());
         ret += "," + CSV.decorate((new Double(y)).toString());
         ret += "," + CSV.decorate((new Integer(z)).toString());
-        ret += "," + CSV.decorate(name == null ? "null" : name);
+        ret += "," + CSV.decorate(name == null ? "" : name);
 
         return ret;
     }
@@ -72,7 +73,7 @@ public class Location implements CSVSerializable {
         val = CSV.nextCell(str, offset);
         offset += val.length();
         val = CSV.undecorate(val);
-        if (val.equals("null"))
+        if (val.length() == 0)
             name = null;
         else
             name = val;
@@ -80,84 +81,66 @@ public class Location implements CSVSerializable {
         return offset;   
     }
     
-    /**
-    * @brief Make location from stream in an interactive manner
-    * 
-    * @param reader Input stream from the user
-    * @param writer Output stream to the user
-    * @return Constructed location
-    * @throws IOException if either of the streams falis
-    * @throws WrongStructureFormatException if the user fails to input a location
-    */
-    public static Location fromStream(BufferedReader reader, BufferedWriter writer) throws IOException,
-        WrongStructureFormatException {
-    	Location ret = new Location();
+    @Override
+    public void fromStream(InteractionStreams userIO) throws IOException, WrongStructureFormatException {
 
-    	writer.write("Location:\n");
-        writer.flush();
+        userIO.writeRequest("Location:\n"); 
 
     	for (;;) {
-    		writer.write("X: ");
-    		writer.flush();
+            userIO.writeRequest("X: "); 
             
-    		String str = reader.readLine();
+    		String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
     		
     		try {
-    			ret.x = new Long(Long.parseLong(str));
+    			x = new Long(Long.parseLong(str));
     			break;
     		} catch (NumberFormatException e) {
-    			writer.write("Unable to parse the value.\n");
-    			writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
     		}
     		
     	}
     	
     	for (;;) {
-    		writer.write("Y: ");
-    		writer.flush();
+            userIO.writeRequest("Y: "); 
             
-    		String str = reader.readLine();
+    		String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
     		
     		try {
-    			ret.y = Double.parseDouble(str);
+    			y = Double.parseDouble(str);
    				break;
     		} catch (NumberFormatException e) {
-    			writer.write("Unable to parse the value.\n");
-    			writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
     		}
     		
     	}
     	
 		for (;;) {
-    		writer.write("Z: ");
-    		writer.flush();
+            userIO.writeRequest("Z: "); 
             
-    		String str = reader.readLine();
+    		String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
     		
     		try {
-    			ret.z = Integer.parseInt(str);
+    			z = Integer.parseInt(str);
    				break;
     		} catch (NumberFormatException e) {
-    			writer.write("Unable to parse the value.\n");
-    			writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
     		}
     		
     	}
 		
 		{
-    		writer.write("Name: ");
-    		writer.flush();
-    		String name = reader.readLine();
-    		if (name.length() > 0)
-    			ret.name = name;
+            userIO.writeRequest("Name: "); 
+            
+    		String str = userIO.readLine();
+    		if (str.length() == 0)
+    			name = null;
     		else
-    			ret.name = null;
+    			name = str;
     	}
     	
-    	return ret;
     }
     
 }

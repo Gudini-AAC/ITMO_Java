@@ -10,20 +10,18 @@ import java.lang.Exception;
 
 public class HelpCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		
 		try {
 			for (int i = 0; i < CommandRegestry.regestry.length; i++) {
 				Command command = (Command)(CommandRegestry.regestry[i].newInstance());
-				writer.write(String.format("%d: %s: %s\n", i, command.keyString(), command.description()));
+				context.getIO().writeWarning(String.format("%d: %s: %s\n", i, command.keyString(), command.description()));
 			}
-		} catch (Exception e) {
-			writer.write(String.format("Internal error: corrupted command regestry."));
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new CommandException(String.format("Internal error: corrupted command regestry."));
 		}
-		
-		writer.flush();
 	}
 	
 	@Override

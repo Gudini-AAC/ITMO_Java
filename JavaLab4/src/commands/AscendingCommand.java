@@ -12,7 +12,7 @@ import java.io.*;
 
 public class AscendingCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		
@@ -20,9 +20,9 @@ public class AscendingCommand implements Command {
 			(x, y) -> (x.location.z > y.location.z ? 1 : x.location.z < y.location.z ? -1 : 0)
 		);
 		
+		
 		for (Person person : persons)
-			writer.write(person.toString());
-		writer.flush();		
+			context.getIO().writeWarning(person.toString());
 	}
 	
 	@Override

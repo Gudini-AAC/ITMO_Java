@@ -18,7 +18,7 @@ public class Database {
 	* @brief Constructs database with associated database file.
 	* @param filepath Path to a database file.
 	*/
-	public Database(String filepath) { this.filepath = filepath; stack = new Stack(); date = LocalDate.now(); }
+	public Database(String filepath) { this.filepath = filepath; stack = new Stack<Person>(); date = LocalDate.now(); }
 	
 	/**
 	* @return Size of the underlying datastructure.
@@ -81,7 +81,7 @@ public class Database {
 	* @return List of passed elements.
 	*/
 	public List<Person> retrieveIf(Predicate<Person> test) {
-		List<Person> ret = new ArrayList();
+		List<Person> ret = new ArrayList<Person>();
 		for (Person person : stack)
 			if (test.test(person)) ret.add(person);
 		return ret;
@@ -103,7 +103,8 @@ public class Database {
 	
 	/**
 	* @brief Retrieve all of the elements in the sorted order.
-	* @param compare Comparison function
+	* @param compare Comparison function.
+	* @return List of sorted elements.
 	*/
 	public List<Person> sortedBy(Comparator<Person> compare) {
 		List<Person> ret = (Stack<Person>)stack.clone();
@@ -121,6 +122,8 @@ public class Database {
 	
 	/**
 	* @brief Save database into the associated file
+	* @throws FileNotFoundException If file is not present.
+    * @throws IOException If one of the user io streams fails.
 	*/
 	public void save() throws IOException, FileNotFoundException {
 		File file = new File(filepath);
@@ -140,28 +143,33 @@ public class Database {
 	
 	/**
 	* @brief Load database from the associated file
+	* @throws FileNotFoundException If file is not present.
+    * @throws IOException If one of the user io streams fails.
 	*/
 	public void load() throws IOException, FileNotFoundException {
 		File file = new File(filepath);
 		FileInputStream fileIStream;
 
 		fileIStream = new FileInputStream(file);
-		BufferedReader fileReader = new BufferedReader(new InputStreamReader(fileIStream));
 		
-		String str = fileReader.readLine();
-		if (str != null) {
-			date = LocalDate.parse(str);
-		
-			for (;;) {
-				str = fileReader.readLine();
-				if (str == null) break;
-				Person person = new Person();
-				person.fromCSV(str, 0);
-				stack.push(person);
+		try {
+			BufferedReader fileReader = new BufferedReader(new InputStreamReader(fileIStream));
+			
+			String str = fileReader.readLine();
+			if (str != null) {
+				date = LocalDate.parse(str);
+			
+				for (;;) {
+					str = fileReader.readLine();
+					if (str == null) break;
+					Person person = new Person();
+					person.fromCSV(str, 0);
+					stack.push(person);
+				}
 			}
+		} finally {
+			fileIStream.close();
 		}
-		
-		fileIStream.close();
 	}
 	
 	private Stack<Person> stack;

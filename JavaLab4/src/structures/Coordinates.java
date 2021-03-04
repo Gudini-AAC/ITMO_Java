@@ -8,7 +8,7 @@ import java.lang.Float;
 import java.lang.NumberFormatException;
 import java.io.*;
 
-public class Coordinates implements CSVSerializable {
+public class Coordinates implements CSVSerializable, Interactive {
     /* private */ public int x;
     /* private */ public float y;
     
@@ -47,63 +47,44 @@ public class Coordinates implements CSVSerializable {
         return offset;   
     }
     
-    /**
-    * @brief Make coordinates from stream in an interactive manner.
-    * 
-    * @param reader Input stream from the user.
-    * @param writer Output stream to the user.
-    * @return Constructed coordinates.
-    * @throws IOException if either of the streams falis.
-    * @throws WrongStructureFormatException if the user fails to input the coordinates.
-    */
-    public static Coordinates fromStream(BufferedReader reader, BufferedWriter writer) throws IOException,
-        WrongStructureFormatException {
-    	Coordinates ret = new Coordinates();
-    	
-    	writer.write("Coordinates:\n");
-        writer.flush();
-    	 
+    @Override
+    public void fromStream(InteractionStreams userIO) throws IOException, WrongStructureFormatException {
+  
+        userIO.writeRequest("Coordinates:\n");
+            	 
     	for (;;) {
-    		writer.write("X: ");
-    		writer.flush();
+            userIO.writeRequest("X: ");      
             
-    		String str = reader.readLine();
+    		String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
     		
     		try {
-    			ret.x = Integer.parseInt(str);
+    			x = Integer.parseInt(str);
     			break;
     		} catch (NumberFormatException e) {
-    			writer.write("Unable to parse the value.\n");
-    			writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
     		}
-    		
     	}
     	
     	for (;;) {
-    		writer.write("Y: ");
-    		writer.flush();
+            userIO.writeRequest("Y: "); 
             
-    		String str = reader.readLine();
+    		String str = userIO.readLine();
             if (str == null) throw new WrongStructureFormatException();
     		
     		try {
     			float y = Float.parseFloat(str);
     			if (y <= 971) {
-    				ret.y = y;
+    				y = y;
     				break;
     			} else {
-    				writer.write("Value is out of range [-inf, 971].\n");
-    				writer.flush();
+                    userIO.writeWarning("Value is out of range [-inf, 971].\n");
     			}
     		} catch (NumberFormatException e) {
-    			writer.write("Unable to parse the value.\n");
-    			writer.flush();
+                userIO.writeWarning("Unable to parse the value.\n");
     		}
-    		
     	}
     	
-    	return ret;
     }
     
 }

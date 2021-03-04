@@ -11,16 +11,16 @@ import java.lang.Class;
 
 public class AddCommand implements Command {
 	@Override
-	public void execute(Database database, BufferedReader reader, BufferedWriter writer, String[] args) throws CommandException, IOException {
+	public void execute(Database database, String[] args, CommandExecutionContext context) throws CommandException, IOException {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 			
 		try {
-			Person person = Person.fromStream(reader, writer);
+			Person person = new Person();
+			person.fromStream(context.getIO());
 			database.add(person);
-		} catch (IOException | WrongStructureFormatException e) {
-			writer.write(e.toString());
-			writer.flush();
+		} catch (WrongStructureFormatException e) {
+			context.getIO().writeWarning(e.toString());
 		}
 		
 	}
