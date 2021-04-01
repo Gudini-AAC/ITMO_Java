@@ -31,7 +31,7 @@ public class Database {
 	*/
 	public int size() {
 		Response ret = server.sendMessage(new RequestSize());
-		if (ret instanceof ResponseSize)
+		if (ret != null && ret instanceof ResponseSize)
 			return ((ResponseSize)ret).getSize();
 		return 0;
 	}
@@ -41,7 +41,7 @@ public class Database {
 	*/
 	public LocalDate constructionDate() { 
 		Response ret = server.sendMessage(new RequestConstructionDate());
-		if (ret instanceof ResponseConstructionDate)
+		if (ret != null && ret instanceof ResponseConstructionDate)
 			return ((ResponseConstructionDate)ret).getConstructionDate();
 		return null;
 	}
@@ -65,7 +65,7 @@ public class Database {
 	* @param val Element to add.
 	*/
 	public void add(Person val) { 
-		Response ret = server.sendMessage(new RequestAdd(val));
+		server.sendMessage(new RequestAdd(val));
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class Database {
 	*/
 	public int findById(long id) {
 		Response ret = server.sendMessage(new RequestFind(id));
-		if (ret instanceof ResponseFind)
+		if (ret != null && ret instanceof ResponseFind)
 			return ((ResponseFind)ret).getIndex();
 		return -1;
 	}
@@ -98,7 +98,7 @@ public class Database {
 	*/
 	public List<Person> retrieveWithSameLocation(Location location) {
 		Response ret = server.sendMessage(new RequestRetrieve(location));
-		if (ret instanceof ResponseRetrieve)
+		if (ret != null && ret instanceof ResponseRetrieve)
 			return ((ResponseRetrieve)ret).getValues();
 		return new ArrayList<Person>();
 	}
@@ -107,8 +107,9 @@ public class Database {
 	* @brief Remove all of the elements that pass the test.
 	* @param test Test function.
 	*/
-	public void removeIf(RequestRemove.Key key, Long value) {
+	public boolean removeIf(RequestRemove.Key key, Long value) {
 		Response ret = server.sendMessage(new RequestRemove(key, value));
+		return ret != null && ret.isSuccessful();
 	}
 	
 	/**
@@ -118,7 +119,7 @@ public class Database {
 	*/
 	public List<Person> sortedBy(RequestSorted.Key key) {
 		Response ret = server.sendMessage(new RequestSorted(key));
-		if (ret instanceof ResponseSorted)
+		if (ret != null && ret instanceof ResponseSorted)
 			return ((ResponseSorted)ret).getValues();
 		return new ArrayList<Person>();
 	}
@@ -126,7 +127,7 @@ public class Database {
 	@Override
 	public String toString() {
 		Response ret = server.sendMessage(new RequestRetrieve(null));
-		if (ret instanceof ResponseRetrieve) {
+		if (ret != null && ret instanceof ResponseRetrieve) {
 			List<Person> values = ((ResponseRetrieve)ret).getValues();
 			
 			String str = "";

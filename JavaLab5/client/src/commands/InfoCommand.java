@@ -5,6 +5,7 @@ import commands.CommandException;
 import commands.CommandRegestry;
 import database.Database;
 import java.io.*;
+import java.time.LocalDate;
 import java.lang.Class;
 
 public class InfoCommand implements Command {
@@ -13,7 +14,15 @@ public class InfoCommand implements Command {
 		if (args.length != 0)
 			CommandException.throwTooManyArgs(keyString(), args);
 		
-		context.getIO().writeWarning(String.format("Type: Stack<Person>, Size: %d, Date: ", database.size()) + database.constructionDate().toString() + "\n");
+		LocalDate date = database.constructionDate();
+		if (date != null) {
+			int size = database.size();
+			
+			String message = String.format("Type: Stack<Person>, Size: %d, Date: ", size);
+			context.getIO().writeWarning(message + date.toString() + "\n");
+		}
+		
+		
 	}
 	
 	@Override

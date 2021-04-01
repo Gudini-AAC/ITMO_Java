@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections; 
 import java.util.function.Predicate;
 import java.util.Comparator;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
+import java.util.stream.*;
 import java.time.LocalDate;
 import java.io.*;
 import protocol.*;
@@ -16,6 +19,7 @@ import structures.Location;
 * @brief This class holds datastructure and the metadata for the database.
 */
 public class Database {
+	
 	/**
 	* @brief Constructs database with associated database file.
 	* @param filepath Path to a database file.
@@ -23,46 +27,16 @@ public class Database {
 	public Database(String filepath) { this.filepath = filepath; stack = new Stack<Person>(); date = LocalDate.now(); }
 	
 	/**
-	* @return Size of the underlying datastructure.
-	*/
-	public int size() { return stack.size(); }
-	
-	/**
-	* @return Date when underlying datastructure was constructed.
-	*/
-	public LocalDate constructionDate() { return date; }
-	
-	/**
-	* @brief Clear the underlying datastructure.
-	*/
-	public void clear() { stack.clear(); }
-	
-	/**
-	* @brief Shuffle the elements in the underlying datastructure.
-	*/
-	public void shuffle() { Collections.shuffle(stack); }
-	
-	/**
 	* @brief Add new element to the database.
 	* @param val Element to add.
 	*/
 	public void add(Person val) { 
-		long maxId = 0;
-		for (Person person : stack)
-			if (person.id > maxId) maxId = person.id;
-		val.id = maxId + 1;
+		OptionalLong maxId = stack.stream().mapToLong(x -> x.id).max();
+		
+		val.id = maxId.isPresent() ? maxId.getAsLong() + 1 : 0;
+		val.creationDate = LocalDate.now();
+		
 		stack.push(val);
-	}
-	
-	/**
-	* @brief Find the first element that passes the test.
-	* @param test Test function.
-	* @return Either index of the element or -1.
-	*/
-	public int findFirstOf(Predicate<Person> test) {
-		for (int i = 0; i < stack.size(); i++)
-			if (test.test(stack.get(i))) return i;
-		return -1;
 	}
 	
 	/**
@@ -78,48 +52,97 @@ public class Database {
 	}
 	
 	/**
-	* @brief Retrieve all of the elements that are passing the test.
-	* @param test Test function.
-	* @return List of passed elements.
+	* @brief Mutates state of the database in responce to a request
+	* @param request Request to the database
+	* @return Responce from the database
 	*/
-	public List<Person> retrieveIf(Predicate<Person> test) {
-		List<Person> ret = new ArrayList<Person>();
-		for (Person person : stack)
-			if (test.test(person)) ret.add(person);
-		return ret;
-	}
+	public Response respond(Request request) {
+		Response ret;
 	
-	/**
-	* @brief Remove all of the elements that pass the test.
-	* @param test Test function.
-	*/
-	public void removeIf(Predicate<Person> test) {
-		for (int i = 0; i < stack.size();) {
-			if (test.test(stack.get(i))) {
-				stack.removeElementAt(i);
-			} else {
-				i++;
+		switch (request.getMessageType()) {
+			case REQUEST_SIZE: {
+            	ret = new ResponseSize(stack.size());
+				break;
+			} case REQUEST_CONSTRUCTUION_DATE: {
+	            ret = new ResponseConstructionDate(date);
+				break;
+			} case REQUEST_CLEAR: {
+				stack.clear();
+            	ret = new ResponseClear(true);
+				break;
+			} case REQUEST_SHUFFLE: {
+				Collections.shuffle(stack);
+	            ret = new ResponseShuffle(true);
+				break;
+			} case REQUEST_ADD: {
+				add(((RequestAdd)request).getPerson());
+				ret = new ResponseAdd(true);
+				break;
+			} case REQUEST_FIND: {
+				long id = ((RequestFind)request).getId();
+				
+				OptionalInt index = IntStream.range(0, stack.size()).filter(x -> stack.get(x).id == id).findFirst();
+				
+				ret = new ResponseFind(index.isPresent() ? index.getAsInt() : -1);
+				break;
+			} case REQUEST_REPLACE: {
+				Person person = ((RequestReplace)request).getPerson();
+				int index = ((RequestReplace)request).getIndex();
+				
+				ret = new ResponseReplace(replace(index, person));
+				break;
+			} case REQUEST_RETRIEVE: {
+				Location location = ((RequestRetrieve)request).getLocation();
+				if (location == null)
+					ret = new ResponseRetrieve(stack);					
+				else
+					ret = new ResponseRetrieve(stack.stream().filter(x -> x.location.equals(location)).collect(Collectors.toList()));
+				break;
+			} case REQUEST_REMOVE: {
+				RequestRemove.Key key = ((RequestRemove)request).getKey();
+				Long value = ((RequestRemove)request).getValue();
+
+				Predicate<Person> predicate = null;
+				if (key == RequestRemove.Key.ID) {
+					predicate = x -> !(x.id == ((Long)value).longValue());
+				} else if (key == RequestRemove.Key.LOCATION_Z_GREATER) {
+					predicate = x -> !(x.location.z > ((Long)value).intValue());
+				} else if (key == RequestRemove.Key.LOCATION_Z_LESS) {
+					predicate = x -> !(x.location.z < ((Long)value).intValue());
+				} else {
+					ret = null;
+					break;
+				} 
+
+				List<Person> persons = stack.stream().filter(predicate).collect(Collectors.toList());
+				boolean removeHappend = persons.size() != stack.size();
+				
+				stack.clear();
+				stack.addAll(persons);
+								
+				ret = new ResponseRemove(removeHappend);
+				break;
+			} case REQUEST_SORTED: {
+				RequestSorted.Key key = ((RequestSorted)request).getKey();
+				
+				Comparator<Person> comparator;
+				if (key == RequestSorted.Key.HEIGHT) {
+					comparator = (x, y) -> (x.height > y.height ? 1 : x.height < y.height ? -1 : 0);
+				} else if (key == RequestSorted.Key.LOCATION_Z) {
+					comparator = (x, y) -> (x.location.z > y.location.z ? 1 : x.location.z < y.location.z ? -1 : 0);
+				} else  {
+					ret = null;
+					break;
+				}
+				
+				ret = new ResponseSorted(stack.stream().sorted(comparator).collect(Collectors.toList()));
+				break;
+			} default: {
+				ret = null;
 			}
 		}
-	}
-	
-	/**
-	* @brief Retrieve all of the elements in the sorted order.
-	* @param compare Comparison function.
-	* @return List of sorted elements.
-	*/
-	public List<Person> sortedBy(Comparator<Person> compare) {
-		List<Person> ret = (Stack<Person>)stack.clone();
-		Collections.sort(ret, compare);
-		return ret;
-	}
-	
-	@Override
-	public String toString() {
-		String ret = "";
-		for (Person person : stack)
-			ret += person.toString();
-		return ret;
+
+		return ret;		
 	}
 	
 	/**
@@ -141,90 +164,6 @@ public class Database {
 
 		fileWriter.flush();
 		fileOStream.close();
-	}
-	
-	public Response respond(Request request) {
-		Response ret;
-	
-		switch (request.getMessageType()) {
-			case REQUEST_SIZE: {
-            	ret = new ResponseSize(size());
-				break;
-			} case REQUEST_CONSTRUCTUION_DATE: {
-	            ret = new ResponseConstructionDate(date);
-				break;
-			} case REQUEST_CLEAR: {
-				clear();
-            	ret = new ResponseClear(true);
-				break;
-			} case REQUEST_SHUFFLE: {
-	            shuffle();
-	            ret = new ResponseShuffle(true);
-				break;
-			} case REQUEST_ADD: {
-				add(((RequestAdd)request).getPerson());
-				ret = new ResponseAdd(true);
-				break;
-			} case REQUEST_FIND: {
-				long id = ((RequestFind)request).getId();
-				ret = new ResponseFind(findFirstOf(x -> id == x.id));
-				break;
-			} case REQUEST_REPLACE: {
-				Person person = ((RequestReplace)request).getPerson();
-				int index = ((RequestReplace)request).getIndex();
-				
-				ret = new ResponseReplace(replace(index, person));
-				break;
-			} case REQUEST_RETRIEVE: {
-				Location location = ((RequestRetrieve)request).getLocation();
-				if (location == null)
-					ret = new ResponseRetrieve(stack);					
-				else
-					ret = new ResponseRetrieve(retrieveIf(x -> x.location.equals(location)));
-				break;
-			} case REQUEST_REMOVE: {
-				RequestRemove.Key key = ((RequestRemove)request).getKey();
-				Long value = ((RequestRemove)request).getValue();
-
-				if (key == RequestRemove.Key.ID) {
-					removeIf(x -> x.id == ((Long)value).longValue());
-					ret = new ResponseRemove(true);
-				} else if (key == RequestRemove.Key.LOCATION_Z_GREATER) {
-					removeIf(x -> x.location.z > ((Long)value).intValue());
-					ret = new ResponseRemove(true);
-				} else if (key == RequestRemove.Key.LOCATION_Z_LESS) {
-					removeIf(x -> x.location.z < ((Long)value).intValue());
-					ret = new ResponseRemove(true);
-				} else {
-					ret = null;
-				} 
-				
-				break;
-			} case REQUEST_SORTED: {
-				RequestSorted.Key key = ((RequestSorted)request).getKey();
-				
-				if (key == RequestSorted.Key.HEIGHT) {
-					List<Person> persons = sortedBy(
-						(x, y) -> (x.height > y.height ? 1 : x.height < y.height ? -1 : 0)
-					);
-					ret = new ResponseSorted(persons);
-				} else if (key == RequestSorted.Key.LOCATION_Z) {
-					List<Person> persons = 
-					sortedBy(
-						(x, y) -> (x.location.z > y.location.z ? 1 : x.location.z < y.location.z ? -1 : 0)
-					);
-					ret = new ResponseSorted(persons);
-				} else {
-					ret = null;
-				}
-
-				break;
-			} default: {
-				ret = null;
-			}
-		}
-
-		return ret;		
 	}
 	
 	/**

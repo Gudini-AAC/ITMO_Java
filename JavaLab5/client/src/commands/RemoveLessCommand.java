@@ -34,8 +34,8 @@ public class RemoveLessCommand implements Command {
             return;
 		}
 		
-		// database.removeIf(x -> x.location.z < z);
-		database.removeIf(RequestRemove.Key.LOCATION_Z_LESS, new Long(z));
+		if (!database.removeIf(RequestRemove.Key.LOCATION_Z_LESS, new Long(z)))
+			context.getIO().writeWarning("No elements removed.\n");
 	}
 	
 	@Override

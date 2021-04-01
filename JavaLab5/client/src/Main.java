@@ -29,6 +29,7 @@ public class Main {
 		for (;;) {
 			try {
 				String str = reader.readLine();
+				if (str == null) break;
 				String[] substrs = str.split(" ");
 				if (substrs.length == 1 && substrs[0].equals("exit")) break;
 				

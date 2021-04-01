@@ -33,8 +33,8 @@ public class RemoveCommand implements Command {
             return;
 		}
 		
-		// database.removeIf(x -> x.id == id);
-		database.removeIf(RequestRemove.Key.ID, new Long(id));
+		if (!database.removeIf(RequestRemove.Key.ID, new Long(id)))
+			context.getIO().writeWarning("No elements removed.\n");
 	}
 	
 	@Override
