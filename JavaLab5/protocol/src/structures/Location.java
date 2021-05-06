@@ -33,14 +33,7 @@ public class Location implements CSVSerializable, Interactive, Serializable {
     
     @Override
     public String toString() {
-    	String ret = "Location {";
-
-		ret += "\n   " + x.toString();    	
-		ret += "\n   " + (new Double(y)).toString();    	
-		ret += "\n   " + (new Integer(z)).toString();    	
-		ret += "\n   " + (name == null ? "null" : name);
-    	
-    	return ret + "\n}\n";
+        return String.format("X: %d, Y: %.3f, Z: %d, Name: %s", x.longValue(), y, z, name);
     }
     
     @Override

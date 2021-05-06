@@ -14,14 +14,7 @@ public class Coordinates implements CSVSerializable, Interactive, Serializable {
     /* private */ public float y;
     
     @Override
-    public String toString() {
-    	String ret = "Coordinates {";
-
-		ret += "\n   " + (new Integer(x)).toString();    	
-		ret += "\n   " + (new Float(y)).toString();    	
-    	
-    	return ret + "\n}\n";
-    }
+    public String toString() { return String.format("X: %d, Y: %.3f", x, y); }
     
     @Override
     public String toCSV() {

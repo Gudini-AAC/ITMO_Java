@@ -6,10 +6,24 @@ import commands.CommandRunner;
 import commands.CommandExecutionContext;
 import structures.InteractionStreams;
 
-public class Main {
+import javafx.application.Application;
+import javafx.stage.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.*;
+import javafx.event.*;
+import javafx.geometry.*;
+import javafx.scene.text.*;
+import javafx.scene.paint.Color;
+
+import gui.*;
+
+public class Main extends Application {
 	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) { launch(args); }
+	
+	@Override
+	public void start(Stage stage) throws Exception {
 		Server server = null;
 		try {
 			server = new Server("localhost", 5454);
@@ -23,22 +37,16 @@ public class Main {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		InteractionStreams userIO = new InteractionStreams(reader, writer, writer);
+		InteractionStreams userIO       = new InteractionStreams(reader, writer, writer);
 		CommandExecutionContext context = new CommandExecutionContext(userIO);
 		
-		for (;;) {
-			try {
-				String str = reader.readLine();
-				if (str == null) break;
-				String[] substrs = str.split(" ");
-				if (substrs.length == 1 && substrs[0].equals("exit")) break;
-				
-				CommandRunner.runCommand(database, substrs, context);
-			} catch (Exception e) {
-				System.out.println(e.toString());
-			} 
-		}
+		Scene scene = new Scene(new HBox());
+		ScreenManager manager = new ScreenManager(scene, stage, database);
+		manager.changeScreenTo(ScreenType.LOGIN_SCREEN);
 		
+		stage.setTitle("Database manager");
+		stage.setScene(scene);
+		stage.show();
 		
 		try {
 			server.stop();

@@ -1,0 +1,1 @@
+javac -d ./client/build --module-path D:\Programs\Java\javafx-sdk-11.0.2\lib --add-modules javafx.controls -encoding utf8 -cp protocol/Protocol.jar -sourcepath  ./client/src ./client/src/Main.java

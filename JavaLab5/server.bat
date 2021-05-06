@@ -1,0 +1,1 @@
+java -classpath "./protocol/Protocol.jar;./server/build/" Main ./assets/database.csv

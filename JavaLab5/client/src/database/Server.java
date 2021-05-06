@@ -14,7 +14,8 @@ public class Server {
     private SocketChannel client;
     private String address;
     private int port;
-
+    private boolean updateIsRequested = true;
+    
     public void stop() throws IOException { client.close(); }
 
     public Server(String address, int port) throws IOException {
@@ -25,8 +26,44 @@ public class Server {
         client.configureBlocking(true);
     }
 
+    public boolean isUpdateRequested() {
+        while (readUpdateRequest()) updateIsRequested = true;
+        
+        if (updateIsRequested) {
+            updateIsRequested = false;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    private boolean readUpdateRequest() {
+        Socket socket = client.socket();
+        try {
+            InputStream istream = socket.getInputStream();
+            if (istream.available() >= 4) { // Server is sending 4 bytes (0xCAFE) to request an update.
+                istream.mark(8);
+                
+                byte[] magic = new byte[4]; 
+                istream.read(magic, 0, 4);
+                
+                boolean isMagic = true;
+                isMagic &= magic[0] == 0xC;
+                isMagic &= magic[1] == 0xA;
+                isMagic &= magic[2] == 0xF;
+                isMagic &= magic[3] == 0xE;
+                
+                if (!isMagic) istream.reset();
+                return isMagic;
+            }
+        } catch (IOException e) {
+            return false;
+        }
+        return false;
+    }
+    
     public Response sendMessage(Request msg) {
-        if (!client.isOpen()) {
+        while (!client.isOpen()) {
             System.out.println("Connecting to the server...");
             
             try {
@@ -48,11 +85,14 @@ public class Server {
             objectOutput.flush();
             
             try {
+                while (readUpdateRequest()) updateIsRequested = true;
                 ObjectInput objectInput = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
                 Object obj = objectInput.readObject();
                 
                 if (obj instanceof Response)
                     response = (Response)obj;
+                
+                while (readUpdateRequest()) updateIsRequested = true;
             } catch (Exception e) {
                 System.out.println("Response from the server is corrupted.");
             }
@@ -62,6 +102,7 @@ public class Server {
             
             try {
                 client.close();
+                response = sendMessage(msg);
             } catch (IOException ex) {
                 System.out.println("Cannot close connection.");
             }

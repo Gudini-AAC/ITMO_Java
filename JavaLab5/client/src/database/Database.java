@@ -64,8 +64,8 @@ public class Database {
 	* @brief Add new element to the database.
 	* @param val Element to add.
 	*/
-	public void add(Person val) { 
-		server.sendMessage(new RequestAdd(val));
+	public boolean add(Person val) { 
+		return server.sendMessage(new RequestAdd(val)) != null;
 	}
 	
 	/**
@@ -123,6 +123,15 @@ public class Database {
 			return ((ResponseSorted)ret).getValues();
 		return new ArrayList<Person>();
 	}
+	
+	public List<Person> retrieve() {
+		Response ret = server.sendMessage(new RequestRetrieve(null));
+		if (ret != null && ret instanceof ResponseRetrieve)
+			return ((ResponseRetrieve)ret).getValues();
+		return null;
+	}
+	
+	public boolean isUpdateRequested() { return server.isUpdateRequested(); }
 	
 	@Override
 	public String toString() {

@@ -80,7 +80,7 @@ public class Main {
     private void handleAccept(SelectionKey key) throws IOException {
         SocketChannel sc = ((ServerSocketChannel)key.channel()).accept();
         
-        String address = (new StringBuilder(sc.socket().getInetAddress().toString())).append(":").append( sc.socket().getPort()).toString();
+        String address = (new StringBuilder(sc.socket().getInetAddress().toString())).append(":").append(sc.socket().getPort()).toString();
         
         sc.configureBlocking(false);
         sc.register(selector, SelectionKey.OP_READ, address);
@@ -111,7 +111,8 @@ public class Main {
             ch.close();
             return;
         }
-        
+
+        boolean sendUpdateRequests = false;        
         if (read < 0) {
             System.out.println(key.attachment() + " left the server.");
             ch.close();
@@ -122,10 +123,18 @@ public class Main {
             try {
                 Object obj = objectInput.readObject();
                 
-                if (obj instanceof Request)
+                if (obj instanceof Request) {
                     response = database.respond((Request)obj);
-                else
+                    if (response instanceof ResponseAdd     ||
+                        response instanceof ResponseReplace ||
+                        response instanceof ResponseRemove  ||
+                        response instanceof ResponseShuffle)
+                    {
+                        sendUpdateRequests = true;
+                    }
+                } else {
                     System.out.println("Request is corrupted.");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,7 +145,24 @@ public class Main {
             
             ch.write(ByteBuffer.wrap(sb.toByteArray()));
         }
-
+        
+        if (sendUpdateRequests) {
+            byte[] magic = new byte[4]; 
+            magic[0] = 0xC;
+            magic[1] = 0xA;
+            magic[2] = 0xF;
+            magic[3] = 0xE;
+            
+            Iterator<SelectionKey> iter = selector.keys().iterator();
+            while(iter.hasNext()) {
+                Channel channel = iter.next().channel();
+                if (channel instanceof SocketChannel) {
+                    ((SocketChannel)channel).write(ByteBuffer.wrap(magic));
+                    System.out.println("Sending update request.");
+                }
+            }
+        }
+        
     }
 
     public static void main(String[] args) throws IOException {

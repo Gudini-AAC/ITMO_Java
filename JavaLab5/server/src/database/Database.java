@@ -47,6 +47,8 @@ public class Database {
 	*/
 	public boolean replace(int index, Person person) {
 		if (index >= stack.size()) return false;
+		person.creationDate = LocalDate.now();
+		person.id = stack.get(index).id;
 		stack.set(index, person);
 		return true;
 	}
