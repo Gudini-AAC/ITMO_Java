@@ -29,15 +29,13 @@ public class Person implements Comparable<Person>, CSVSerializable, Interactive,
     // Only because of the freaking table view
     public long getId() { return id; }
     public String getName() { return name; }
-    public Coordinates getCoordinates() { return coordinates; }
+    public int getCoordinatesX() { return coordinates.x; }
+    public float getCoordinatesY() { return coordinates.y; }
     public LocalDate getCreationDate() { return creationDate; }
     public long getHeight() { return height; }
     public Color getEyeColor() { return eyeColor; }
     public Color getHairColor() { return hairColor; }
     public Country getNationality() { return nationality; }
-    public Location getLocation() { return location; }
-    public int getCoordinatesX() { return coordinates.x; }
-    public float getCoordinatesY() { return coordinates.y; }
     public Long getLocationX() { return location.x; }
     public double getLocationY() { return location.y; }
     public int getLocationZ() { return location.z; }

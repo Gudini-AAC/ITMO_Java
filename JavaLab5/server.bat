@@ -1,1 +1,1 @@
-java -classpath "./protocol/Protocol.jar;./server/build/" Main ./assets/database.csv
+java --module-path "D:\Programs\Java\postgresql-42.2.20" -classpath "./protocol/Protocol.jar;./server/build/" Main %*

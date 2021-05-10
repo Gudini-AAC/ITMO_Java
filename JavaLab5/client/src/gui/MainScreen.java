@@ -23,8 +23,10 @@ import java.time.LocalDate;
 
 import gui.ScreenManager;
 import gui.ScreenType;
+import gui.LocaleType;
 
 import protocol.RequestRemove;
+import protocol.SessionData;
 import database.Database;
 import structures.*;
 
@@ -86,13 +88,13 @@ public class MainScreen {
                 person.location = new Location();
                 
                 person.name = nameTextField.getCharacters().toString();
-                if (person.name == null) { actiontarget.setText("Illigal name string."); return; }
+                if (person.name == null) { actiontarget.setText(manager.getString("illigal_name")); return; }
                 
                 try {
                     String str = coordinatesX.getCharacters().toString();
                     person.coordinates.x = Integer.parseInt(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the coordinates.x.");
+                    actiontarget.setText(manager.getString("unable_to_parse_coord_x"));
                     return;
                 }
                 
@@ -102,11 +104,11 @@ public class MainScreen {
                     if (y <= 971) {
                         person.coordinates.y = y;
                     } else {
-                        actiontarget.setText("Coordinates.y is out of range [-inf, 971].");
+                        actiontarget.setText(manager.getString("coord_y_out_of_range"));
                         return;
                     }
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the coordinates.y.");
+                    actiontarget.setText(manager.getString("unable_to_parse_coord_y"));
                     return;
                 }
                 
@@ -116,11 +118,11 @@ public class MainScreen {
                     if (height > 0) {
                         person.height = height;
                     } else {
-                        actiontarget.setText("Height is out of range [1, 9223372036854775807].");
+                        actiontarget.setText(manager.getString("height_out_of_range"));
                         return;
                     }
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the height.");
+                    actiontarget.setText(manager.getString("unable_to_parse_height"));
                     return;
                 }
                 
@@ -128,7 +130,7 @@ public class MainScreen {
                     String str = locationX.getCharacters().toString();
                     person.location.x = new Long(Long.parseLong(str));
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the location.x.");
+                    actiontarget.setText(manager.getString("unable_to_parse_loc_x"));
                     return;
                 }
                 
@@ -136,7 +138,7 @@ public class MainScreen {
                     String str = locationY.getCharacters().toString();
                     person.location.y = Double.parseDouble(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the location.y.");
+                    actiontarget.setText(manager.getString("unable_to_parse_loc_y"));
                     return;
                 }
                 
@@ -144,7 +146,7 @@ public class MainScreen {
                     String str = locationZ.getCharacters().toString();
                     person.location.z = Integer.parseInt(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the location.z.");
+                    actiontarget.setText(manager.getString("unable_to_parse_loc_z"));
                     return;
                 }
                 
@@ -154,28 +156,28 @@ public class MainScreen {
                 person.hairColor = hairColorCombo.getSelectionModel().getSelectedItem();
                 person.nationality = nationalityCombo.getSelectionModel().getSelectedItem();
                 
-                if (person.eyeColor == null) { actiontarget.setText("Eye color must be set."); return; }
-                if (person.nationality == null) { actiontarget.setText("Nationality must be set."); return; }
+                if (person.eyeColor == null)    { actiontarget.setText(manager.getString("eye_color_must_be_set")); return; }
+                if (person.nationality == null) { actiontarget.setText(manager.getString("hair_color_must_be_set")); return; }
                 
                 if (!database.add(person)) {
-                    actiontarget.setText("Connection with server is lost.");
+                    actiontarget.setText(manager.getString("connection_lost"));
                 } else {
                     dialog.close();
                 }
             });
         
-            grid.add(new Label("Name:"),          0, 0); grid.add(nameTextField,    1, 0);
-            grid.add(new Label("Height:"),        0, 1); grid.add(heightTextField,  1, 1);
-            grid.add(new Label("Coordinates:"),   0, 2); grid.add(coordinatesGrid,  1, 2);
-            grid.add(new Label("Location:"),      0, 3); grid.add(locationGrid,     1, 3);
-            grid.add(new Label("Location name:"), 0, 4); grid.add(locationName,     1, 4);
-            grid.add(new Label("Eye color:"),     0, 5); grid.add(eyeColorCombo,    1, 5);
-            grid.add(new Label("Hair color:"),    0, 6); grid.add(hairColorCombo,   1, 6);
-            grid.add(new Label("Nationality:"),   0, 7); grid.add(nationalityCombo, 1, 7);
-            grid.add(buttonGrid,                  0, 8); grid.add(actiontarget,     1, 8);
+            grid.add(new Label(manager.getString("in_lab_name")),          0, 0); grid.add(nameTextField,    1, 0);
+            grid.add(new Label(manager.getString("in_lab_height")),        0, 1); grid.add(heightTextField,  1, 1);
+            grid.add(new Label(manager.getString("in_lab_coordinates")),   0, 2); grid.add(coordinatesGrid,  1, 2);
+            grid.add(new Label(manager.getString("in_lab_location")),      0, 3); grid.add(locationGrid,     1, 3);
+            grid.add(new Label(manager.getString("in_lab_location_name")), 0, 4); grid.add(locationName,     1, 4);
+            grid.add(new Label(manager.getString("in_lab_eye_color")),     0, 5); grid.add(eyeColorCombo,    1, 5);
+            grid.add(new Label(manager.getString("in_lab_hair_color")),    0, 6); grid.add(hairColorCombo,   1, 6);
+            grid.add(new Label(manager.getString("in_lab_nationality")),   0, 7); grid.add(nationalityCombo, 1, 7);
+            grid.add(buttonGrid,                                           0, 8); grid.add(actiontarget,     1, 8);
             
             Scene dialogScene = new Scene(grid);
-            dialog.setTitle("Person input");
+            dialog.setTitle(manager.getString("add_person"));
             dialog.setScene(dialogScene);
             dialog.show();
         }
@@ -243,18 +245,18 @@ public class MainScreen {
                     String str = idTextField.getCharacters().toString();
                     id = Long.parseLong(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the id.");
+                    actiontarget.setText(manager.getString("unable_to_parse_id"));
                     return;
                 }
                 
                 person.name = nameTextField.getCharacters().toString();
-                if (person.name == null) { actiontarget.setText("Illigal name string."); return; }
+                if (person.name == null) { actiontarget.setText(manager.getString("illigal_name")); return; }
                 
                 try {
                     String str = coordinatesX.getCharacters().toString();
                     person.coordinates.x = Integer.parseInt(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the coordinates.x.");
+                    actiontarget.setText(manager.getString("unable_to_parse_coord_x"));
                     return;
                 }
                 
@@ -264,11 +266,11 @@ public class MainScreen {
                     if (y <= 971) {
                         person.coordinates.y = y;
                     } else {
-                        actiontarget.setText("Coordinates.y is out of range [-inf, 971].");
+                        actiontarget.setText(manager.getString("coord_y_out_of_range"));
                         return;
                     }
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the coordinates.y.");
+                    actiontarget.setText(manager.getString("unable_to_parse_coord_y"));
                     return;
                 }
                 
@@ -278,11 +280,11 @@ public class MainScreen {
                     if (height > 0) {
                         person.height = height;
                     } else {
-                        actiontarget.setText("Height is out of range [1, 9223372036854775807].");
+                        actiontarget.setText(manager.getString("height_out_of_range"));
                         return;
                     }
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the height.");
+                    actiontarget.setText(manager.getString("unable_to_parse_height"));
                     return;
                 }
                 
@@ -290,7 +292,7 @@ public class MainScreen {
                     String str = locationX.getCharacters().toString();
                     person.location.x = new Long(Long.parseLong(str));
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the location.x.");
+                    actiontarget.setText(manager.getString("unable_to_parse_loc_x"));
                     return;
                 }
                 
@@ -298,7 +300,7 @@ public class MainScreen {
                     String str = locationY.getCharacters().toString();
                     person.location.y = Double.parseDouble(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the location.y.");
+                    actiontarget.setText(manager.getString("unable_to_parse_loc_y"));
                     return;
                 }
                 
@@ -306,7 +308,7 @@ public class MainScreen {
                     String str = locationZ.getCharacters().toString();
                     person.location.z = Integer.parseInt(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the location.z.");
+                    actiontarget.setText(manager.getString("unable_to_parse_loc_z"));
                     return;
                 }
                 
@@ -316,36 +318,30 @@ public class MainScreen {
                 person.hairColor = hairColorCombo.getSelectionModel().getSelectedItem();
                 person.nationality = nationalityCombo.getSelectionModel().getSelectedItem();
                 
-                if (person.eyeColor == null) { actiontarget.setText("Eye color must be set."); return; }
-                if (person.nationality == null) { actiontarget.setText("Nationality must be set."); return; }
-                
-                int index = database.findById(id);
-                if (index == -1) {
-                    actiontarget.setText("Element not found.");
-                    return;
-                }
+                if (person.eyeColor == null)    { actiontarget.setText(manager.getString("eye_color_must_be_set")); return; }
+                if (person.nationality == null) { actiontarget.setText(manager.getString("hair_color_must_be_set")); return; }
                 
                 person.id = id;
-                if (!database.replace(index, person)) {
-                    actiontarget.setText("Connection with server is lost.");
+                if (!database.replace(person)) {
+                    actiontarget.setText(manager.getString("connection_lost"));
                 } else {
                     dialog.close();
                 }
             });
-        
-            grid.add(new Label("Id:"),            0, 0); grid.add(idTextField,      1, 0);
-            grid.add(new Label("Name:"),          0, 1); grid.add(nameTextField,    1, 1);
-            grid.add(new Label("Height:"),        0, 2); grid.add(heightTextField,  1, 2);
-            grid.add(new Label("Coordinates:"),   0, 3); grid.add(coordinatesGrid,  1, 3);
-            grid.add(new Label("Location:"),      0, 4); grid.add(locationGrid,     1, 4);
-            grid.add(new Label("Location name:"), 0, 5); grid.add(locationName,     1, 5);
-            grid.add(new Label("Eye color:"),     0, 6); grid.add(eyeColorCombo,    1, 6);
-            grid.add(new Label("Hair color:"),    0, 7); grid.add(hairColorCombo,   1, 7);
-            grid.add(new Label("Nationality:"),   0, 8); grid.add(nationalityCombo, 1, 8);
-            grid.add(buttonGrid,                  0, 9); grid.add(actiontarget,     1, 9);
+
+            grid.add(new Label(manager.getString("in_lab_id")),            0, 0); grid.add(idTextField,      1, 0);
+            grid.add(new Label(manager.getString("in_lab_name")),          0, 1); grid.add(nameTextField,    1, 1);
+            grid.add(new Label(manager.getString("in_lab_height")),        0, 2); grid.add(heightTextField,  1, 2);
+            grid.add(new Label(manager.getString("in_lab_coordinates")),   0, 3); grid.add(coordinatesGrid,  1, 3);
+            grid.add(new Label(manager.getString("in_lab_location")),      0, 4); grid.add(locationGrid,     1, 4);
+            grid.add(new Label(manager.getString("in_lab_location_name")), 0, 5); grid.add(locationName,     1, 5);
+            grid.add(new Label(manager.getString("in_lab_eye_color")),     0, 6); grid.add(eyeColorCombo,    1, 6);
+            grid.add(new Label(manager.getString("in_lab_hair_color")),    0, 7); grid.add(hairColorCombo,   1, 7);
+            grid.add(new Label(manager.getString("in_lab_nationality")),   0, 8); grid.add(nationalityCombo, 1, 8);
+            grid.add(buttonGrid,                                           0, 9); grid.add(actiontarget,     1, 9);
             
             Scene dialogScene = new Scene(grid);
-            dialog.setTitle("Person input");
+            dialog.setTitle(manager.getString("replace_person"));
             dialog.setScene(dialogScene);
             dialog.show();
         }
@@ -365,20 +361,28 @@ public class MainScreen {
         vbox.setStyle("-fx-border-radius: 1;");
         vbox.setStyle("-fx-border-color: black;");
 
-                
-        Button shuffleButton = new Button("Shuffle");
+        ComboBox<LocaleType> localeCombo = new ComboBox<>();
+        localeCombo.setPrefWidth(BUTTON_WIDTH);
+        localeCombo.setItems(FXCollections.observableArrayList(LocaleType.values()));        
+        localeCombo.getSelectionModel().select(manager.getLocale());        
+        localeCombo.setOnAction((event)-> {
+            manager.loadLocale(localeCombo.getSelectionModel().getSelectedItem());
+            manager.changeScreenTo(ScreenType.MAIN_SCREEN);
+        });
+                        
+        Button shuffleButton = new Button(manager.getString("shuffle"));
         shuffleButton.setPrefWidth(BUTTON_WIDTH);
         shuffleButton.setOnAction((event)-> { database.shuffle(); });
  
-        Button addPersonButton = new Button("Add...");
+        Button addPersonButton = new Button(manager.getString("add___"));
         addPersonButton.setPrefWidth(BUTTON_WIDTH);
         addPersonButton.setOnAction(new AddPersonGui(manager, database));
  
-        Button replacePersonButton = new Button("Update...");
+        Button replacePersonButton = new Button(manager.getString("update___"));
         replacePersonButton.setPrefWidth(BUTTON_WIDTH);
         replacePersonButton.setOnAction(new ReplacePersonGui(manager, database));
         
-        Button removePersonButton = new Button("Remove...");
+        Button removePersonButton = new Button(manager.getString("remove___"));
         removePersonButton.setPrefWidth(BUTTON_WIDTH);
         removePersonButton.setOnAction((event)-> {
             Stage dialog = new Stage();
@@ -405,60 +409,59 @@ public class MainScreen {
             Button submitButton = new Button("Submit"); HBox.setHgrow(submitButton, Priority.ALWAYS);
             buttonGrid.getChildren().addAll(submitButton, closeButton);
             closeButton.setOnAction((closeEvent)-> { dialog.close(); });
-            submitButton.setOnAction((closeEvent)-> {
+            submitButton.setOnAction((closeEvent)-> {            
                 RequestRemove.Key key = removeKeyCombo.getSelectionModel().getSelectedItem();
-                if (key == null) { actiontarget.setText("Remove key must be set."); return; }
+                if (key == null) { actiontarget.setText(manager.getString("remove_key_must_be_set")); return; }
                 
                 final long value;
                 try {
                     String str = valueField.getCharacters().toString();
                     value = Long.parseLong(str);
                 } catch (NumberFormatException e) {
-                    actiontarget.setText("Unable to parse the value.");
+                    actiontarget.setText(manager.getString("unable_to_parse_value"));
                     return;
                 }
                 
                 if (!database.removeIf(key, new Long(value))) {
-                    actiontarget.setText("No elements have been removed.");
+                    actiontarget.setText(manager.getString("no_elements_removed"));
                 } else {
                     dialog.close();
                 }
             });
             
-            grid.add(new Label("Remove Key:"),   0, 0); grid.add(removeKeyCombo, 1, 0);
-            grid.add(new Label("Target value:"), 0, 1); grid.add(valueField,     1, 1);
-            grid.add(buttonGrid,                 0, 2); grid.add(actiontarget,   1, 2);
+            grid.add(new Label(manager.getString("remove_key")),   0, 0); grid.add(removeKeyCombo, 1, 0);
+            grid.add(new Label(manager.getString("remove_value")), 0, 1); grid.add(valueField,     1, 1);
+            grid.add(buttonGrid,                                   0, 2); grid.add(actiontarget,   1, 2);
             
             Scene dialogScene = new Scene(grid);
-            dialog.setTitle("Remove");
+            dialog.setTitle(manager.getString("remove"));
             dialog.setScene(dialogScene);
             dialog.show();
         });
         
-        vbox.getChildren().addAll(shuffleButton, addPersonButton, replacePersonButton, removePersonButton);
+        vbox.getChildren().addAll(localeCombo, shuffleButton, addPersonButton, replacePersonButton, removePersonButton);
         
         TableView<Person> table = new TableView<Person>();
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        TableColumn<Person, Long> idColumn = new TableColumn<>("Id");
-        TableColumn<Person, String> nameColumn = new TableColumn<>("Name");
-        TableColumn<Person, Long> heightColumn = new TableColumn<>("Height");
+        TableColumn<Person, Long> idColumn = new TableColumn<>(manager.getString("in_lab_id"));
+        TableColumn<Person, String> nameColumn = new TableColumn<>(manager.getString("in_lab_name"));
+        TableColumn<Person, Long> heightColumn = new TableColumn<>(manager.getString("in_lab_height"));
         
-        TableColumn<Person, Color> hairColorColumn = new TableColumn<>("Hair color");
-        TableColumn<Person, Color> eyeColorColumn = new TableColumn<>("Eye color");
-        TableColumn<Person, Country> nationalityColorColumn = new TableColumn<>("Nationality");
-        TableColumn<Person, LocalDate> dateColumn = new TableColumn<>("Creation date");
+        TableColumn<Person, Color> hairColorColumn = new TableColumn<>(manager.getString("in_lab_hair_color"));
+        TableColumn<Person, Color> eyeColorColumn = new TableColumn<>(manager.getString("in_lab_eye_color"));
+        TableColumn<Person, Country> nationalityColorColumn = new TableColumn<>(manager.getString("in_lab_nationality"));
+        TableColumn<Person, LocalDate> dateColumn = new TableColumn<>(manager.getString("creation_date"));
         
-        TableColumn<Person, Coordinates> coordinatesColumn = new TableColumn<>("Coordinates");
+        TableColumn<Person, Coordinates> coordinatesColumn = new TableColumn<>(manager.getString("in_lab_coordinates"));
         TableColumn<Person, Integer> coordinatesXColumn = new TableColumn<>("X");
         TableColumn<Person, Float> coordinatesYColumn = new TableColumn<>("Y");
         
-        TableColumn<Person, Location> locationColumn = new TableColumn<>("Location");
+        TableColumn<Person, Location> locationColumn = new TableColumn<>(manager.getString("in_lab_location"));
         TableColumn<Person, Long> locationXColumn = new TableColumn<>("X");
         TableColumn<Person, Double> locationYColumn = new TableColumn<>("Y");
         TableColumn<Person, Integer> locationZColumn = new TableColumn<>("Z");
-        TableColumn<Person, String> locationNameColumn = new TableColumn<>("Name");
-        
+        TableColumn<Person, String> locationNameColumn = new TableColumn<>(manager.getString("in_lab_location_name"));
         
         
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -481,24 +484,28 @@ public class MainScreen {
         locationZColumn.setCellValueFactory(new PropertyValueFactory<>("locationZ"));
         locationNameColumn.setCellValueFactory(new PropertyValueFactory<>("locationName"));
         locationColumn.getColumns().addAll(locationXColumn, locationYColumn, locationZColumn, locationNameColumn);
-        
+
         class DatabasePoll extends TimerTask {
+            boolean firstTime = true;
+            
             public void run() {
-                if (database.isUpdateRequested()) {
-                    System.out.println("Updating!");
-                    
+                if (firstTime | (database.isUpdateRequested() && SessionData.accessAllowed)) {
                     List<Person> persons = database.retrieve();
+                    
                     if (persons != null) {
                         table.getItems().remove(0, table.getItems().size());
                         for (Person person : persons) table.getItems().add(person);
                         table.sort();
                     }
+                    
+                    firstTime = false;
                 }
             }
         }
         
-        Timer timer = new Timer(true);
-        timer.schedule(new DatabasePoll(), 0, 100);
+        //Timer timer = new Timer(true);
+        //timer.schedule(new DatabasePoll(), 0, 100);
+        manager.addCallback(new DatabasePoll(), 100);
         
         table.getColumns().add(idColumn);
         table.getColumns().add(nameColumn);

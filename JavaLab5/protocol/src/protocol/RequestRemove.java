@@ -7,7 +7,7 @@ import protocol.Request;
 import structures.Person;
 import java.lang.Long;
 
-public class RequestRemove implements Request {
+public class RequestRemove extends Request {
 	public enum Key {
 		ID,
 		LOCATION_Z_GREATER,

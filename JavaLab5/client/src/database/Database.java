@@ -86,8 +86,8 @@ public class Database {
 	* @param person New element to insert.
 	* @return Success bool.
 	*/
-	public boolean replace(int index, Person person) {
-		Response ret = server.sendMessage(new RequestReplace(index, person));
+	public boolean replace(Person person) {
+		Response ret = server.sendMessage(new RequestReplace(person));
 		return ret != null && ret.isSuccessful();
 	}
 	
@@ -132,6 +132,16 @@ public class Database {
 	}
 	
 	public boolean isUpdateRequested() { return server.isUpdateRequested(); }
+	
+	public boolean isAccessible() {
+		Response ret = server.sendMessage(new RequestAccess());
+		return ret != null && ret.isSuccessful();
+	}
+	
+	public boolean register() {
+		Response ret = server.sendMessage(new RequestRegister());
+		return ret != null && ret.isSuccessful();
+	}
 	
 	@Override
 	public String toString() {

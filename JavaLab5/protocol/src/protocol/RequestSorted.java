@@ -6,7 +6,7 @@ import protocol.Request;
 import protocol.SerializableComparator;
 import structures.Person;
 
-public class RequestSorted implements Request {
+public class RequestSorted extends Request {
 	public enum Key {
 		LOCATION_Z,
 		HEIGHT

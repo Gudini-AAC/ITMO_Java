@@ -6,11 +6,9 @@ import protocol.MessageType;
 import protocol.Request;
 import structures.Person;
 
-public class RequestReplace implements Request {
-	public RequestReplace(int index, Person person) { this.index = index; this.person = person; }
+public class RequestReplace extends Request {
+	public RequestReplace(Person person) { this.person = person; }
 	public MessageType getMessageType() { return MessageType.REQUEST_REPLACE; }
 	public Person getPerson() { return person; }
-	public int getIndex() { return index; }
 	private Person person;
-	private int index;
 }

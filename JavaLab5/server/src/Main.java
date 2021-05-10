@@ -13,20 +13,18 @@ public class Main {
     private final int port;
     private ServerSocketChannel ssc;
     private Selector selector;
-    private ByteBuffer buf = ByteBuffer.allocate(256);
+    private ByteBuffer buf = ByteBuffer.allocate(1024);
     private Database database;
 
-    Main(int port, String path) throws IOException {
+    Main(int port, String login, String password) throws IOException {
         this.port = port;
         
-        database = new Database(path);
+        database = new Database(login, password);
         
         try {
             database.load();
-        } catch (FileNotFoundException e) {
-            System.out.println("Database file not found");
         } catch (Exception e) {
-            System.out.println("Database file is corrupted.");
+            e.printStackTrace();
         }
         
         ssc = ServerSocketChannel.open();
@@ -47,16 +45,7 @@ public class Main {
                 if (reader.ready()) {
                     String line = reader.readLine();
                     
-                    if ("exit".equals(line)) {
-                        break;
-                    } else if ("save".equals(line)) {
-                        try {
-                            database.save();
-                            System.out.println("Database is saved!");
-                        } catch (FileNotFoundException e) {
-                            System.out.println("Database file not found\n");
-                        }
-                    }
+                    if ("exit".equals(line)) break;
                 }
                 
                 if (selector.selectNow() != 0) {
@@ -166,14 +155,10 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        Main server = new Main(5454, args[0]);
-        server.run();
+        if (args.length != 2 ) { System.out.println("Server expects exactly 2 arguments."); System.exit(1); }
         
-        try {
-            server.database.save();
-        } catch (FileNotFoundException e) {
-            System.out.println("Database file not found\n");
-        }
+        Main server = new Main(5454, args[0], args[1]);
+        server.run();
     }
 
     

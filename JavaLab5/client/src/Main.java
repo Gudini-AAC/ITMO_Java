@@ -2,8 +2,6 @@ import java.io.*;
 import database.Database;
 import database.Server;
 import java.lang.Exception;
-import commands.CommandRunner;
-import commands.CommandExecutionContext;
 import structures.InteractionStreams;
 
 import javafx.application.Application;
@@ -15,6 +13,8 @@ import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.text.*;
 import javafx.scene.paint.Color;
+
+
 
 import gui.*;
 
@@ -33,12 +33,6 @@ public class Main extends Application {
 		}
 		
 		Database database = new Database(server);
-		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		InteractionStreams userIO       = new InteractionStreams(reader, writer, writer);
-		CommandExecutionContext context = new CommandExecutionContext(userIO);
 		
 		Scene scene = new Scene(new HBox());
 		ScreenManager manager = new ScreenManager(scene, stage, database);

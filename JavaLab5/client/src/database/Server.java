@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Iterator;
 
 import protocol.Request;
+import protocol.RequestRetrieve;
 import protocol.Response;
 
 public class Server {
@@ -28,13 +29,7 @@ public class Server {
 
     public boolean isUpdateRequested() {
         while (readUpdateRequest()) updateIsRequested = true;
-        
-        if (updateIsRequested) {
-            updateIsRequested = false;
-            return true;
-        }
-        
-        return false;
+        return updateIsRequested;
     }
     
     private boolean readUpdateRequest() {
@@ -107,6 +102,9 @@ public class Server {
                 System.out.println("Cannot close connection.");
             }
         }
+        
+        if (msg instanceof RequestRetrieve && response != null && response.isSuccessful())
+            updateIsRequested = false;
         
         return response;
     }

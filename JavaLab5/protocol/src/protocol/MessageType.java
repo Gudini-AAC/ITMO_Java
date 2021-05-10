@@ -1,6 +1,9 @@
 package protocol;
 
 public enum MessageType {
+	NONE,
+	REQUEST_ACCESS,
+	REQUEST_REGISTER,
 	REQUEST_SIZE,
 	REQUEST_CONSTRUCTUION_DATE,
 	REQUEST_CLEAR,
